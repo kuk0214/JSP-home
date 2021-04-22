@@ -17,7 +17,7 @@ import com.increpas.coffee.vo.MemberVO;
  * @version	v.1.0
  */
 
-public class ClsMemberDao {
+public class MemberDao {
 	// 커넥션 풀을 관리할 변수
 	CafeDBCP db;
 	Connection con;
@@ -27,7 +27,7 @@ public class ClsMemberDao {
 	MemberSQL mSQL;
 	
 	
-	public ClsMemberDao() {
+	public MemberDao() {
 		db = new CafeDBCP();
 		mSQL = new MemberSQL();
 	}

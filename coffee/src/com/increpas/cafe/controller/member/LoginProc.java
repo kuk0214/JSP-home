@@ -17,7 +17,7 @@ public class LoginProc implements CafeController {
 		String spw = req.getParameter("pw");
 
 		// 2. 데이터 베이스 작업하고
-		ClsMemberDao mDao = new ClsMemberDao();
+		MemberDao mDao = new MemberDao();
 		int cnt = mDao.getLogin(sid, spw);
 		// 3. 결과에 따라 처리하고
 		String view = "/cafe/main.cafe";
