@@ -14,7 +14,7 @@ import com.increpas.coffee.vo.MemberVO;
 public class JoinProc implements CafeController {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp)  {
 		String view = "/cafe/main.cafe";
 		String sname = req.getParameter("name");
 		String sid = req.getParameter("id");

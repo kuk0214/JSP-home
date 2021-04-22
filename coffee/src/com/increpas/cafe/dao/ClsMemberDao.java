@@ -17,7 +17,7 @@ import com.increpas.coffee.vo.MemberVO;
  * @version	v.1.0
  */
 
-public class ClsMembDao {
+public class ClsMemberDao {
 	// 커넥션 풀을 관리할 변수
 	CafeDBCP db;
 	Connection con;
@@ -27,7 +27,7 @@ public class ClsMembDao {
 	MemberSQL mSQL;
 	
 	
-	public ClsMembDao() {
+	public ClsMemberDao() {
 		db = new CafeDBCP();
 		mSQL = new MemberSQL();
 	}
@@ -87,9 +87,11 @@ public class ClsMembDao {
 	}
 	
 	// 로그인 처리 데이터 베이스 작업 전담 처리함수
-	public int getLoginCnt(String sid, String spw) {
-		int cnt = 1;
-		// 1. Connection
+	public int getLogin(String sid, String spw) {
+		// 반환값 변수
+		int cnt = 0;
+		// 할일
+		// 1. 커넥션 꺼내오고
 		con = db.getCon();
 		// 2. 질의명령 가져오고
 		String sql = mSQL.getSQL(mSQL.SEL_LOGIN);
@@ -148,4 +150,35 @@ public class ClsMembDao {
 		// 데이터 반환하고
 		return cnt;
 	}
+	
+	// 아이디 카운트 데이터베이스 조회 전담 처리함수
+		public int getIdCnt(String id) {
+			// 할일
+			// 0. 반환값 변수 만들고
+			int cnt = 1 ;
+			
+			// 1. 커넥션 꺼내오고
+			con = db.getCon();
+			// 2. 질의명령 꺼내오고
+			String sql = mSQL.getSQL(mSQL.SEL_ID_CNT);
+			// 3. 스테이트먼트 준비하고
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				// 4. 질의명령 완성하고
+				pstmt.setString(1, id);
+				// 5. 질의명령 보내고 결과받고
+				rs = pstmt.executeQuery();
+				// 6. 결과에서 데이터 꺼내고
+				rs.next();
+				cnt = rs.getInt("cnt");
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(pstmt);
+				db.close(con);
+			}
+			// 7. 데이터 반환하고
+			return cnt;
+		}
 }

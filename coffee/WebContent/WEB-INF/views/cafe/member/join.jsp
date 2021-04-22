@@ -44,7 +44,7 @@
 		});
 		
 		$('#hbtn').click(function() {
-			$(location).attr('href', '/cafe/main.cafe');
+			$(location).attr('href', '/cafe/main.cls');
 		});
 		
 		$('#idck').click(function() {

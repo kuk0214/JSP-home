@@ -10,7 +10,7 @@ import com.increpas.cafe.controller.CafeController;
 public class Logout implements CafeController {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp)  {
 		// 이 요청의 경우는 처리후 리다이렉트로 뷰가 전환되어야 하기 때문에
 		req.setAttribute("isRedirect", true);
 		

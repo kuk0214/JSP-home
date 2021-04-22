@@ -14,7 +14,7 @@ import com.increpas.coffee.vo.MemberVO;
 public class MyInfo implements CafeController {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp)  {
 		String view = "/member/memberInfo";
 		HttpSession session = req.getSession();
 		

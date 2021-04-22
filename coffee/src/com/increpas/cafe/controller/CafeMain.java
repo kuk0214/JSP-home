@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 public class CafeMain implements CafeController {
 
 	@Override
-	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String exec(HttpServletRequest req, HttpServletResponse resp)  {
 		String view = "main";
 		return view;
 	}

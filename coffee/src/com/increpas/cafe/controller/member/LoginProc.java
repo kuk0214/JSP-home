@@ -1,45 +1,38 @@
 package com.increpas.cafe.controller.member;
 
-import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import com.increpas.cafe.controller.CafeController;
-import com.increpas.coffee.dao.ClsMemberDao;
+import com.increpas.cafe.dao.*;
 
 public class LoginProc implements CafeController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		String view = "/cafe/main.cafe";
 		// 할일
+		// 0. 뷰 부르는 방식 설정하고...
 		// 1. 파라미터 받고
 		String sid = req.getParameter("id");
 		String spw = req.getParameter("pw");
 
-		// 2. dao 함수 호출하고
+		// 2. 데이터 베이스 작업하고
 		ClsMemberDao mDao = new ClsMemberDao();
-		int cnt = mDao.getLoginCnt(sid, spw);
+		int cnt = mDao.getLogin(sid, spw);
 		// 3. 결과에 따라 처리하고
+		String view = "/cafe/main.cafe";
 		if(cnt == 1) {
-			HttpSession session = req.getSession();
-			session.setAttribute("SID", sid);
+			// 로그인 처리하고
+			req.getSession().setAttribute("SID", sid);
+			// 뷰 부르는 방식 설정하고...
+			req.setAttribute("isRedirect", true);
 		} else {
-			view = "login.cafe";
+			req.setAttribute("isRedirect", true);
+			view = "/cafe/member/login.cafe?MSG=fail";
 		}
-		// 4. 뷰를 처리방식 선택하고
-		req.setAttribute("isRedirect", true);
-		// 5.
-		/*
-			이 경우 로그인에 성공하던지
-			실패하던지 두 경우 모두 요청이 살아있으면 곤란한 경우이다
-			따라서 두 경우 모두 리다이렉트 방식으로 뷰를 불러야 한다.
-			리다이렉트 처리는 응답객체에서 처리해서
-			새로운 요청을 만들어 준다.
-		 */
+		// 4. 뷰를 부르고
+		
+		
 		
 		return view;
 	}

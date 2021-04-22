@@ -55,9 +55,15 @@
 								http://localhost/cafe/main.cafe	
 							실패 :
 								http://localhost/cafe/member/join.cafe		
-	기타	 	:		회원가입 처리가 성공하면 로그인 처리해주기로 한다.	
+	기타	 	:		회원가입 처리가 성공하면 로그인 처리해주기로 한다.
+	
+6. 아이디 체크 요청 - 비동기 통신 처리
+	요청내용 	: http://localhost/cafe/member/idcheck.cafe
+	파라미터 	: id
+	컨트롤러 	: com.increpas.cafe.controller.member.IdCheck
+	뷰		 	: 무	
 
-6. 내 정보보기 요청
+7. 내 정보보기 요청
 	요청내용	: http://localhost/cafe/member/myInfo.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfo
