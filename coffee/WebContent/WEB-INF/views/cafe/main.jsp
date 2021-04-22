@@ -67,6 +67,9 @@
 			case 'cafeJoin':
 				url = 'member/join.cafe';
 				break;
+			case 'cafeMyInfo':
+				url = 'member/myInfo.cafe';
+				break;
 			case 'cafeLogout':
 				url = 'member/logout.cafe';
 				break;

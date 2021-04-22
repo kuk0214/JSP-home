@@ -24,21 +24,12 @@
 	$(document).ready(function() {
 		$('#hbtn').click(function() {
 			// addMember.jsp 페이지로 돌려보낸다.
-			$(location).attr('href', '/cafe/main.cls');
+			$(location).attr('href', '/cafe/main.cafe');
 		});
 	});
 </script>
 </head>
 <body>
-<%--
-	회원아이디가
-		euns 이면 농장주
-		han, chae 이면 종업원
-		나머지는 방문객으로 표현되도록 한다.
-		
-	회원의 성별은
-		남자, 여자로 표현한다.
- --%>
 	<div class="w3-content mxw650 w3-center">
 		<h1 class="w3-padding w3-card-4 mgt20 w3-green">내 정보</h1>
 		

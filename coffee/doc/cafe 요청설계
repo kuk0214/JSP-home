@@ -56,4 +56,10 @@
 							실패 :
 								http://localhost/cafe/member/join.cafe		
 	기타	 	:		회원가입 처리가 성공하면 로그인 처리해주기로 한다.	
+
+6. 내 정보보기 요청
+	요청내용	: http://localhost/cafe/member/myInfo.cafe
+	파라미터	: 무(SID)
+	컨트롤러	: com.increpas.cafe.controller.member.MyInfo
+	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
 	
