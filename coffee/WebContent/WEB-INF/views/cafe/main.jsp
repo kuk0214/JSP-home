@@ -67,6 +67,9 @@
 			case 'cafeJoin':
 				url = 'member/join.cafe';
 				break;
+			case 'cafeLogout':
+				url = 'member/logout.cafe';
+				break;
 			}
 			$(location).attr('href', url);
 		});

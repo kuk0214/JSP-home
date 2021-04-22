@@ -44,7 +44,7 @@
 		});
 		
 		$('#hbtn').click(function() {
-			$(location).attr('href', 'main.cafe');
+			$(location).attr('href', '/cafe/main.cafe');
 		});
 		
 		$('#idck').click(function() {
@@ -106,7 +106,7 @@
 	<div class="w3-content w3-margin-top mxw700">
 		<!-- 타이틀 -->
 		<h1 class="w3-pink w3-center w3-padding w3-card-4">Cls 회원가입</h1>
-		<form method="POST" action="/cafe/member/joinProc.cls" name="frm" id="frm"
+		<form method="POST" action="/cafe/member/joinProc.cafe" name="frm" id="frm"
 			class="w3-col w3-margin-top w3-margin-bottom w3-padding w3-card-4">
 			<div>
 				<label for="name" class="w3-col s3 w3-right-align w3-margin-top clrgrey ft14 mgb10 pdt5">회원이름 : </label>

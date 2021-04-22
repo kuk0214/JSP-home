@@ -33,5 +33,27 @@
 	요청내용	:	http://localhost/cafe/member/logout.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.member.Logout
-	뷰			:	/WEB-INF/views/cafe/member/join.jsp
+	뷰			:	redirect ]
+							http://localhost/cafe/main.cafe
+							
+4. 로그인 처리 요청 
+	요청내용	:	http://localhost/cafe/member/loginProc.cafe
+	파라미터	:	id, pw
+	컨트롤러	:	com.increpas.cafe.controller.member.LoginProc
+	뷰			:	redirect ]
+							성공 :
+								http://localhost/cafe/main.cafe	
+							실패 :
+								http://localhost/cafe/member/login.cafe				
+								
+5. 회원가입 처리 요청
+	요청내용 	: http://localhost/cafe/member/joinProc.cafe
+	파라미터 	: name, id, pw, mail, tel, get, avt
+	컨트롤러 	: com.increpas.cafe.controller.member.JoinProc
+	뷰		 	: redirect ]
+							성공 :
+								http://localhost/cafe/main.cafe	
+							실패 :
+								http://localhost/cafe/member/join.cafe		
+	기타	 	:		회원가입 처리가 성공하면 로그인 처리해주기로 한다.	
 	

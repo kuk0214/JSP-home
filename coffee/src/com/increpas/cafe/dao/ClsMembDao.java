@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import com.increpas.cafe.db.*;
 import com.increpas.cafe.sql.*;
 import com.increpas.cafe.vo.*;
+import com.increpas.coffee.vo.MemberVO;
 
 /**
  * 이 클래스는 회원관련 데이터베이스 작업을
@@ -83,5 +84,68 @@ public class ClsMembDao {
 		
 		// 8. VO 내보내주고
 		return mVO;
+	}
+	
+	// 로그인 처리 데이터 베이스 작업 전담 처리함수
+	public int getLoginCnt(String sid, String spw) {
+		int cnt = 1;
+		// 1. Connection
+		con = db.getCon();
+		// 2. 질의명령 가져오고
+		String sql = mSQL.getSQL(mSQL.SEL_LOGIN);
+		// 3. 스테이먼트 준비하고 
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			// 4. 질의명령 완성하고
+			pstmt.setString(1, sid);
+			pstmt.setString(2, spw);
+			// 5. 질의명령 보내고 결과받고
+			rs = pstmt.executeQuery();
+			// 6. 결과에서 데이터 꺼내고
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		
+		// 반환해주고....
+		return cnt;
+	}
+	
+	// 회원가입 처리 데이터 베이스 작업 전담 처리함수
+	public int addMemb(MemberVO mVO) {
+		// 반환값 변수 만들어주고
+		int cnt = 0 ;
+		// 할일
+		// 1. 커넥션 꺼내오고
+		con = db.getCon();
+		// 2. 질의명령 꺼내오고
+		String sql = mSQL.getSQL(mSQL.ADD_MEMB);
+		// 3. 스테이먼트 준비하고
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			// 4. 질의명령 완성하고
+			pstmt.setString(1, mVO.getName());
+			pstmt.setString(2, mVO.getId());
+			pstmt.setString(3, mVO.getPw());
+			pstmt.setString(4, mVO.getMail());
+			pstmt.setString(5, mVO.getTel());
+			pstmt.setString(6, mVO.getGen());
+			pstmt.setInt(7, mVO.getAno());
+			// 5. 질의명령 보내고 결과 받고
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		// 데이터 반환하고
+		return cnt;
 	}
 }

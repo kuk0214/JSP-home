@@ -14,7 +14,7 @@
 	$(document).ready(function() {
 		// btn1 click event
 		$('#hbtn').click(function() {
-			$(location).attr('href', 'main.cafe');
+			$(location).attr('href', '/cafe/main.cafe');
 		});
 		
 		// login 버튼 이벤트 처리
@@ -36,7 +36,7 @@
 	<div class="w3-content mxw650 w3-center">
 		<h1 class="w3-blue w3-padding w3-card-4 w3-round-large">Login</h1>
 		
-		<form method="POST" action="http://localhost/cafe/member/loginProc.cls" name="frm" id="frm"
+		<form method="POST" action="http://localhost/cafe/member/loginProc.cafe" name="frm" id="frm"
 				class="showFr">
 			<div class="w3-col w3-margin-top w3-card-4 w3-padding w3-round-large">
 				<div class="w3-col w3-margin-top">

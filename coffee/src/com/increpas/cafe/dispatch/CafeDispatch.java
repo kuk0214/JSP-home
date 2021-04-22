@@ -32,7 +32,7 @@ public class CafeDispatch extends HttpServlet {
 		//		최초로 이 서블릿이 시작되면
 		//		준비된 properties 파일을 읽어서
 		//		이것을 이용해서 맵을 만들어서 놓는다.
-		//		즉, 요청이 오면 사용할 클래스가 무엇인지 등록한다.
+		//		즉, 요이 오면 사용할 클래스가 무엇인지 등록한다.
 		
 		// 우리의 경우 직접 Properties에 정의된 내용을 읽어서
 		// Map으로 만들어야 하는데
@@ -123,6 +123,14 @@ public class CafeDispatch extends HttpServlet {
 		// CafeController에 입력하면서 함수를 호출하게 된다.
 		// 다시 말해서 하나의 객체를 계속 사용하게 된다.
 		req.setAttribute("isRedirect", bool);
+		/*
+			이제 CafeController 에서 isRedirect 의 속성값을 변경하지 않으면
+			데이터는 false 로 유지될 것이고
+			이때는 forward 방식으로 뷰를 부르고
+			
+			만약 exec함수 내에서
+			
+		 */
 		
 		// 실행하고
 		String view = controller.exec(req, resp);
@@ -148,10 +156,25 @@ public class CafeDispatch extends HttpServlet {
 					앞에 붙이는 경로는 prefix라는 변수로 처리하고
 					뒤에 붙는 확장자는 suffix라는 변수로 처리하기로 하자.
 		 */
-		String prefix = "/WEB-INF/views/cafe/";
-		String suffix = ".jsp";
 		
-		RequestDispatcher rd = req.getRequestDispatcher(prefix + view + suffix);
-		rd.forward(req, resp);
+		// 요청 객체에 isRedirect 속성값을 변수에 담고
+		bool = (Boolean) req.getAttribute("isRedirect");
+		// 변수의 내용을 살펴서 처리한다.
+		if(bool == null) {
+			// 비동기 통신 처리
+			PrintWriter pw = resp.getWriter();
+			pw.print(view);
+		} else if(bool) {
+			// 리다이렉트 처리하는 경우
+			resp.sendRedirect(view);
+		} else {
+			// forward 방식 처리
+			String prefix = "/WEB-INF/views/cafe/";
+			String suffix = ".jsp";
+			
+			RequestDispatcher rd = req.getRequestDispatcher(prefix + view + suffix);
+			rd.forward(req, resp);
+		}
+		
 	}
 }
