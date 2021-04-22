@@ -1,0 +1,49 @@
+# j04 요청설계
+
+# 로그인페이지 폼보기 요청
+요청내용 : http://localhost/cafe/html/j04/login.jsp
+파라미터 : 무
+컨트롤러 : 무
+뷰		 : /html/j04/login.jsp
+
+# forward 요청
+요청내용 : http://localhost/cafe/html/j04/forwardPage.jsp
+파라미터 : id, pw
+컨트롤러 : 무
+뷰		 : /html/j04/requestPage.jsp
+
+# redirect 요청
+요청내용 : http://localhost/cafe/html/j04/redirectPage.jsp
+파라미터 : id, pw
+컨트롤러 : 무
+뷰		 : redirect ] /html/j04/requestPage.jsp
+
+# requestPage 요청
+요청내용 : http://localhost/cafe/html/j04/requestPage.jsp
+파라미터 : id, pw
+컨트롤러 : 무
+뷰		 : /html/j04/requestPage.jsp
+
+# elTestPage 요청
+요청내용 : http://localhost/cafe/html/j04/elTestPage.jsp
+파라미터 : 무
+컨트롤러 : 무
+뷰		 : /html/j04/elTestPage.jsp
+
+# gugudan 요청
+요청내용 : http://localhost/cafe/html/j04/gugudan.jsp
+파라미터 : 무
+컨트롤러 : 무
+뷰		 : /html/j04/gugudan.jsp
+
+# addMember 요청
+요청내용 : http://localhost/cafe/html/j05/addMember.jsp
+파라미터 : 무
+컨트롤러 : 무
+뷰		 : /html/j05/addMember.jsp
+
+# memberInfo 요청
+요청내용 : http://localhost/cafe/html/j05/memberInfo.jsp
+파라미터 : name, id, gen, avt
+컨트롤러 : 무
+뷰		 : /html/j05/addMember.jsp

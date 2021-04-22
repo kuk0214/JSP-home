@@ -1,0 +1,82 @@
+# main 페이지 요청
+요청내용 : http://localhost/cafe/main.cls
+파라미터 : 무
+컨트롤러 : com.increpas.coffee.controller.MainController
+뷰		 : /WEB-INF/views/main.jsp
+
+# 회원추가 폼보기 요청
+요청내용 : http://localhost/cafe/j05/addMember.cls
+파라미터 : code
+컨트롤러 : com.increpas.coffee.controller.j05.AddMember
+뷰		 : /WEB-INF/views/j05/addMember.jsp
+
+# 회원정보 보기 taglib 처리페이지 요청
+요청내용 : http://localhost/cafe/j05/memberInfo.cls
+파라미터 : name, id, gen, avt
+컨트롤러 : com.increpas.coffee.controller.j05.MemberInfo
+뷰		 : /WEB-INF/views/j05/memberInfo.jsp
+
+# 회원정보 보기 jquery 처리페이지 요청
+요청내용 : http://localhost/cafe/j05/memberInfo2.cls
+파라미터 : name, id, gen, avt
+컨트롤러 : com.increpas.coffee.controller.j05.MemberInfo2
+뷰		 : /WEB-INF/views/j05/memberInfo2.jsp
+
+# 어노테이션 연습 페이지 요청
+요청내용 : http://localhost/cafe/j5/addmemb.cls
+파라미터 : name, id, gen, avt
+컨트롤러 : com.increpas.coffee.controller.j5.AddMemb
+뷰		 : /WEB-INF/views/j5/addMemb.jsp
+
+======================================================================================
+# 회원관련 요청설계(non-dispatch)
+
+# 로그인 폼 보기 요청
+요청내용 : http://localhost/cafe/member/login.cls
+파라미터 : 무
+컨트롤러 : com.increpas.coffee.controller.member.LoginForm
+뷰		 : /WEB-INF/views/member/login.jsp
+
+# 로그인 처리 요청
+요청내용 : http://localhost/cafe/member/loginProc.cls
+파라미터 : id, pw
+컨트롤러 : com.increpas.coffee.controller.member.ClsLoginProc
+뷰		 : 
+				로그인 성공 :
+					redirect ] /cafe/main.cls
+				로그인 실패 :
+					redirect ] /cafe/member/login.cls
+					
+# 로그아웃 처리 요청
+요청내용 : http://localhost/cafe/member/logout.cls
+파라미터 : 무
+컨트롤러 : com.increpas.coffee.controller.member.Logout
+뷰		 : 
+			redirect ] http://localhost/cafe/main.cls
+			
+# 회원가입 폼 보기 요청
+요청내용 : http://localhost/cafe/member/join.cls
+파라미터 : 무
+컨트롤러 : com.increpas.coffee.controller.member.JoinForm
+뷰		 : /WEB-INF/views/member/join.jsp
+
+# 아이디 체크 요청 - 비동기 통신 처리
+요청내용 : http://localhost/cafe/member/idcheck.cls
+파라미터 : id
+컨트롤러 : com.increpas.coffee.controller.member.IdCheck
+뷰		 : 무
+
+# 회원가입 처리 요청
+요청내용 : http://localhost/cafe/member/joinProc.cls
+파라미터 : name, id, pw, mail, tel, get, avt
+컨트롤러 : com.increpas.coffee.controller.member.JoinProc
+뷰		 : 
+				성공 : redirect ] http://localhost/cafe/main.cls
+				실패 : redirect ] http://localhost/cafe/member/join.cls
+기타	 :		회원가입 처리가 성공하면 로그인 처리해주기로 한다.
+
+# 내정보 보기 요청
+요청내용 : http://localhost/cafe/member/myInfo.cls
+파라미터 : 무(SID)
+컨트롤러 : com.increpas.coffee.controller.member.MyInfo
+뷰		 : /WEB-INF/views/member/memberInfo.jsp

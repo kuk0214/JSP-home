@@ -1,0 +1,37 @@
+# cafe 요청설계
+
+요청설계 형식
+	요청내용	:
+	파라미터	:
+	컨트롤러	:
+	뷰			:
+
+	
+# 메인 화면 요청 설계
+	요청내용	:	http://localhost/cafe/main.cafe
+	파라미터	:	무
+	컨트롤러	:	com.increpas.cafe.controller.CafeMain
+	뷰			:	/WEB-INF/views/cafe/main.jsp
+	
+-------------------------------------------------------------------------------------------------------------------
+
+# 회원 관련 요청 설계
+
+1. 로그인 폼보기 요청
+	요청내용	:	http://localhost/cafe/member/login.cafe
+	파라미터	:	무
+	컨트롤러	:	com.increpas.cafe.controller.member.LoginFrom
+	뷰			:	/WEB-INF/views/cafe/member/login.jsp
+	
+2. 회원가입 폼보기 요청
+	요청내용	:	http://localhost/cafe/member/join.cafe
+	파라미터	:	무
+	컨트롤러	:	com.increpas.cafe.controller.member.JoinFrom
+	뷰			:	/WEB-INF/views/cafe/member/join.jsp
+
+3. 로그아웃 
+	요청내용	:	http://localhost/cafe/member/logout.cafe
+	파라미터	:	무
+	컨트롤러	:	com.increpas.cafe.controller.member.Logout
+	뷰			:	/WEB-INF/views/cafe/member/join.jsp
+	
