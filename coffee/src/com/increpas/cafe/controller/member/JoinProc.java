@@ -15,7 +15,6 @@ public class JoinProc implements CafeController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp)  {
-		String view = "/cafe/main.cafe";
 		String sname = req.getParameter("name");
 		String sid = req.getParameter("id");
 		String spw = req.getParameter("pw");
@@ -37,13 +36,14 @@ public class JoinProc implements CafeController {
 		ClsMemberDao mDao = new ClsMemberDao();
 		int cnt = mDao.addMemb(mVO);
 		
+		String view = "/cafe/main.cafe";
 		if(cnt == 1) {
 			HttpSession session = req.getSession();
 			session.setAttribute("SID", sid);
 		} else {
-			view = "join.cafe";
+			view = "redirectPage";
+			req.setAttribute("JOINMSG", "fail");
 		}
-		req.setAttribute("isRedirect", true);
 		
 		return view;
 	}

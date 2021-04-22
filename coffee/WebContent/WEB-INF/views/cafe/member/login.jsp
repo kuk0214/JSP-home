@@ -57,7 +57,8 @@
 		</div>
 		
 	<!-- 로그인 처리 실패시 메세지 처리 -->
-	<c:if test="${not empty param.MSG}">
+<%-- <c:if test="${not empty param.MSG}"> --%>
+	<c:if test="${not empty MSG}">
 		<div id="msgWin" class="w3-modal">
 			<div class="w3-modal-content mxw600 w3-card-4">
 				<header class="w3-container w3-red">

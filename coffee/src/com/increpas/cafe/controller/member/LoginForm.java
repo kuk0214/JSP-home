@@ -9,6 +9,15 @@ public class LoginForm implements CafeController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String view = "member/login";
+		if(req.getSession().getAttribute("SID") != null) {
+			req.setAttribute("isRedirect", true);
+			view = "/cafe/main.cafe";
+		}
+		
+		if(req.getParameter("msg") != null) {
+			req.setAttribute("MSG", req.getParameter("msg"));
+		}
+		
 		return view;
 	}
 }

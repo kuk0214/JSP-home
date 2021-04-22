@@ -27,10 +27,17 @@ public class LoginProc implements CafeController {
 			// 뷰 부르는 방식 설정하고...
 			req.setAttribute("isRedirect", true);
 		} else {
-			req.setAttribute("isRedirect", true);
-			view = "/cafe/member/login.cafe?MSG=fail";
+			/*
+			 파라미터로 바로 뷰를 다시 부르는 방식
+			 req.setAttribute("isRedirect", true); 
+			 view = "/cafe/member/login.cafe?MSG=fail";
+			 */
+			
+			// forward 방식으로 리다이렉트용 페이지를 부르는 방식
+			view = "redirectPage";
+			// 요청객체에 데이터를 심어준다.
+			req.setAttribute("LOGINMSG", "fail");
 		}
-		// 4. 뷰를 부르고
 		
 		
 		
