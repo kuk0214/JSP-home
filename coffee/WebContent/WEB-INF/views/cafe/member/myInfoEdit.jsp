@@ -94,7 +94,7 @@
 						<div class="avtboxfr w3-center w3-margin-top" id="mavt">
 					<c:forEach var="idx" begin="1" end="3">
 						 	<div class="avtbox">
-						 		<label for="mavt${idx}">
+						 		<label for="${idx}">
 						 			<img src="/cafe/img/avatar/img_avatar${idx}.png" class="w3-col avtimg">
 						 		</label>
 						 		<input type="radio" name="avt" id="${idx}" value="${idx}">
@@ -106,7 +106,7 @@
 						 <div class="avtboxfr w3-center w3-margin-top" id="favt">
 					<c:forEach var="idx" begin="4" end="6">
 						 	<div class="avtbox">
-						 		<label for="favt${idx}">
+						 		<label for="${idx}">
 						 			<img src="/cafe/img/avatar/img_avatar${idx}.png" class="w3-col avtimg">
 						 		</label>
 						 		<input type="radio" name="avt" id="${idx}" value="${idx}">
