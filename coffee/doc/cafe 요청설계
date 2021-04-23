@@ -59,21 +59,26 @@
 	
 
 
-6. 내 정보보기 요청
+6. 내 정보 보기 요청
 	요청내용	: http://localhost/cafe/member/myInfo.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfo
 	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
 	
-7. 회원 목록보기 요청
+7. 회원 목록 보기 요청
 	요청내용	: http://localhost/cafe/member/memberList.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MemberList
 	뷰			: /WEB-INF/views/cafe/member/memberList.jsp
 	
-8. 회원 정보보기 요청
+8. 회원 정보 보기 요청
 	요청내용	: http://localhost/cafe/member/memberInfo.cafe
-	파라미터	: 무(SID)
+	파라미터	: mno
 	컨트롤러	: com.increpas.cafe.controller.member.MemberInfo
 	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
-	
+
+9. 내 정보 수정 보기 요청
+	요청내용	: http://localhost/cafe/member/myInfoEdit.cafe
+	파라미터	: 무(SID)
+	컨트롤러	: com.increpas.cafe.controller.member.MyInfoEdit
+	뷰			: /WEB-INF/views/cafe/member/myInfoEdit.jsp

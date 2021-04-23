@@ -26,6 +26,9 @@
 			// addMember.jsp 페이지로 돌려보낸다.
 			$(location).attr('href', '/cafe/main.cafe');
 		});
+		$('#ebtn').click(function() {
+			$(location).attr('href', '/cafe/member/myInfoEdit.cafe');
+		});	
 	});
 </script>
 </head>
@@ -87,7 +90,7 @@
 <c:if test="${SID eq DATA.id }">
 		<div class="w3-col w3-margin-top w3-card-4 showFr">
 			<div class="w3-half w3-padding w3-green w3-button" id="hbtn">home</div>
-			<div class="w3-half w3-padding w3-blue w3-hover-aqua w3-button id="ebtn">정보수정</div>
+			<div class="w3-half w3-padding w3-blue w3-hover-aqua w3-button" id="ebtn">정보수정</div>
 		</div>		
 </c:if>
 	</div>
