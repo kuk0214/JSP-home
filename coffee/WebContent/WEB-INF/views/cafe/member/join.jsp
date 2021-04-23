@@ -82,6 +82,7 @@
 					alert('### 통신 실패 ###');
 				}
 			});
+			
 		});
 		
 		$('#jbtn').click(function() {

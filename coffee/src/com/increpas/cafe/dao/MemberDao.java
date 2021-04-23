@@ -1,12 +1,15 @@
 package com.increpas.cafe.dao;
 
 import java.sql.*;
+import java.util.*;
+import java.sql.Date;
+
 import javax.sql.DataSource;
 
 import com.increpas.cafe.db.*;
 import com.increpas.cafe.sql.*;
 import com.increpas.cafe.vo.*;
-import com.increpas.coffee.vo.MemberVO;
+
 
 /**
  * 이 클래스는 회원관련 데이터베이스 작업을
@@ -180,5 +183,53 @@ public class MemberDao {
 			}
 			// 7. 데이터 반환하고
 			return cnt;
+		}
+		
+		// 회원리스트 조회 데이터베이스 작업 전담 처리함수
+		public ArrayList<MemberVO> getMembList() {
+			// 반환값 변수 만들고
+			ArrayList<MemberVO> list = new ArrayList<MemberVO>(); 
+			// 할일
+			// 1. 커넥션 꺼내오고
+			con = db.getCon();
+			// 2. 질의명령 가져오고
+			String sql = mSQL.getSQL(mSQL.SEL_MEMB_LIST);
+			// 3. 스테이트먼트 준비하고
+			stmt = db.getSTMT(con);
+			try {
+				// 4. 질의명령 보내고 결과 받고
+				rs = stmt.executeQuery(sql);
+				// 5. 결과에서 데이터꺼내고 VO에 담고
+				while(rs.next()) {
+					MemberVO mVO = new MemberVO(); // 한명당 한개씩 데이터 담을 그릇 만들고...
+					// 데이터 꺼내서 VO에 담고
+					mVO.setMno(rs.getInt("mno"));
+					mVO.setName(rs.getString("name"));
+					mVO.setGen(rs.getString("gen").equals("M") ? "남자" : "여자");
+					// 가입일의 경우는 날짜와 시간을 따로 꺼내야 되기때문에
+					// 꺼내서 처리하고...
+					mVO.setjDate(rs.getDate("joindate"));
+					mVO.setjTime(rs.getTime("joindate"));
+					// 리스트에 보여주는 데이터는 날짜만 보여주기로 하자.
+					// 시간이 셋팅이 되면 sdate 변수도 초기화가 되므로
+					// sdate를 날짜까지만 남기고 처리해준다.
+					String str = mVO.getSdate();
+					String data = str.substring(0, str.indexOf(' '));
+					mVO.setSdate(data);
+					
+					// 한명분 데이터가 완성이 됬으므로 리스트에 추가해준다.
+					// 6. VO를 list에 담고
+					list.add(mVO);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(stmt);
+				db.close(con);
+			}
+			
+			// list 반환하고
+			return list;
 		}
 }

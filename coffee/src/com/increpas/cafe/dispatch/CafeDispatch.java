@@ -163,7 +163,8 @@ public class CafeDispatch extends HttpServlet {
 		if(bool == null) {
 			// 비동기 통신 처리
 			PrintWriter pw = resp.getWriter();
-			pw.print(view);
+			pw.println(view);
+			
 		} else if(bool) {
 			// 리다이렉트 처리하는 경우
 			resp.sendRedirect(view);

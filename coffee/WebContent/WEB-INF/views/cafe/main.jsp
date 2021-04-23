@@ -73,6 +73,9 @@
 			case 'cafeLogout':
 				url = 'member/logout.cafe';
 				break;
+			case 'membList':
+				url = 'member/memberList.cafe';
+				break;
 			}
 			$(location).attr('href', url);
 		});
@@ -158,6 +161,9 @@
 					</div>
 					<div class="w3-col w3-deep-purple w3-margin-bottom w3-button cafeMBtn" id="cafeLogout">
 						<h4>Cafe 로그아웃</h4>
+					</div>
+					<div class="w3-col w3-blue w3-margin-bottom w3-button cafeMBtn" id="membList">
+						<h4>회원 목록 보기</h4>
 					</div>
 				</c:if>
 				</div>
