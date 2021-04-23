@@ -27,9 +27,8 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#pbtn').click(function() {
-			// 회원목록보기 페이지로 돌려보낸다.
-			$(location).attr('href', '/cafe/member/memberList.cafe');
+		$('#cbtn').click(function() {
+			$(location).attr('href', '/cafe/main.cafe');
 		});
 		$('[src="/cafe/img/avatar/${DATA.avatar}"]').parent().next().attr('checked', 'checked');
 	});
@@ -106,7 +105,7 @@
 		</div>
 
 		<div class="w3-col w3-margin-top w3-card-4 showFr">
-			<div class="w3-half w3-padding w3-green w3-button" id="pbtn">이전</div>
+			<div class="w3-half w3-padding w3-green w3-button" id="cbtn">취소</div>
 			<div class="w3-half w3-padding w3-blue w3-hover-aqua w3-button" id="sbtn">확인</div>
 		</div>		
 	</div>
