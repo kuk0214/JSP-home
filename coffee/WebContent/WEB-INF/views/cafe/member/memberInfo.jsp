@@ -31,7 +31,14 @@
 </head>
 <body>
 	<div class="w3-content mxw650 w3-center">
-		<h1 class="w3-padding w3-card-4 mgt20 w3-green">내 정보</h1>
+		<h1 class="w3-padding w3-card-4 mgt20 w3-green">
+			<c:if test="${SID eq DATA.id}">
+				내 정보
+			</c:if>
+			<c:if test="${SID ne DATA.id}">
+				회원 정보
+			</c:if>
+		</h1>
 		
 		<div id="frm">
 			<div class="w3-col w3-margin-top w3-card-4 w3-padding w3-round-large">
@@ -72,10 +79,17 @@
 				</div>
 			</div>
 		</div>
-		
+<c:if test="${SID ne DATA.id}">
 		<div class="w3-col w3-margin-top w3-card-4 showFr">
-			<div class="w3-col w3-padding w3-green w3-button w3-round-large" id="hbtn">home</div>
+			<div class="w3-col w3-padding w3-green w3-button" id="hbtn">home</div>
 		</div>
+</c:if>
+<c:if test="${SID eq DATA.id }">
+		<div class="w3-col w3-margin-top w3-card-4 showFr">
+			<div class="w3-half w3-padding w3-green w3-button" id="hbtn">home</div>
+			<div class="w3-half w3-padding w3-blue w3-hover-aqua w3-button id="ebtn">정보수정</div>
+		</div>		
+</c:if>
 	</div>
 </body>
 </html>

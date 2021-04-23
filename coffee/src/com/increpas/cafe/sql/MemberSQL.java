@@ -5,6 +5,7 @@ public class MemberSQL {
 	public final int SEL_ID_CNT		= 1002;
 	public final int SEL_ID_INFO	= 1003;
 	public final int SEL_MEMB_LIST	= 1004;
+	public final int SEL_NO_INFO	= 1005;
 	
 	public final int ADD_MEMB		= 3001;
 	
@@ -48,6 +49,16 @@ public class MemberSQL {
 			buff.append("	isshow = 'Y' "); // 현재 활동중이 회원만 꺼내온다.
 			buff.append("ORDER BY ");
 			buff.append("	mno DESC");
+			break;
+		case SEL_NO_INFO:
+			buff.append("SELECT ");
+			buff.append("    mno, name, id, mail, tel, member.gen, ano, savename avatar, joindate ");
+			buff.append("FROM ");
+			buff.append("    member, avatar ");
+			buff.append("WHERE ");
+			buff.append("	avt = ano ");
+			buff.append("	AND isshow = 'Y' ");
+			buff.append("	AND mno = ?");
 			break;
 		case ADD_MEMB:
 			buff.append("INSERT INTO ");

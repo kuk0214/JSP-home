@@ -10,16 +10,37 @@
 <link rel="stylesheet" type="text/css" href="/cafe/css/user.css">
 <script type="text/javascript" src="/cafe/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/cafe/js/w3color.js"></script>
-<style type="text/css"></style>
+<style type="text/css">
+	.mbtn {
+		cursor: pointer;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#hbtn').click(function() {
 			$(location).attr('href', '/cafe/main.cafe');
 		});
+		
+		$('.mbtn').click(function() {
+			/*
+			// 선택된 태그와의 관계로 선택해서 데이터 읽어오는 방법
+			var sno = $(this).children().eq(0).html();
+			*/
+			
+			// 선택된 태그의 속성을 읽어서 처리하는 방법
+			var sno = $(this).attr('id');
+			
+			$('#mno').val(sno);
+			$('#frm').submit(); 
+		});
+		
 	});
 </script>
 </head>
 <body>
+	<form method="POST" action="/cafe/member/memberInfo.cafe" id="frm" name="frm">
+		<input type="hidden" name="mno" id="mno">
+	</form>
 	<div class="w3-content mxw700 w3-center w3-margin-top">
 		<h1 class="w3-green w3-margin-top w3-margin-bottom w3-card-4 w3-round-large">회원 리스트</h1>
 		<div class="w3-col w3-card-4 w3-round-large w3-padding w3-margin-bottom">
@@ -33,10 +54,10 @@
 			<!-- 회원 리스트 -->
 <c:forEach var="data" items="${LIST}" varStatus="st">
 	<c:if test="${LIST.size() eq st.count}">
-			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-margin-bottom w3-border-teal">
+			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-margin-bottom w3-border-teal w3-hover-blue mbtn" id="${data.mno}">
 	</c:if>
 	<c:if test="${LIST.size() ne st.count}">
-			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-border-teal">
+			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-border-teal w3-hover-blue mbtn" id="${data.mno}">
 	</c:if>
 				<div class="w3-col m2 w3-border-right w3-border-teal">${data.mno}</div>
 				<div class="w3-col m3 w3-border-right w3-border-teal">${data.name}</div>

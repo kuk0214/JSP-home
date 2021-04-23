@@ -232,4 +232,47 @@ public class MemberDao {
 			// list 반환하고
 			return list;
 		}
+		
+		// 회원 정보조회 데이터베이스 작업 전담 처리 함수
+		public MemberVO getMembInfo(int mno) {
+			// 반환값 변수 준비하고
+			MemberVO mVO = new MemberVO();
+			// 데이터베이스 작업 처리
+			// 할일
+			// 1. 커넥션 얻어오고
+			con = db.getCon();
+			// 2. 질의명령 꺼내오고
+			String sql = mSQL.getSQL(mSQL.SEL_NO_INFO);
+			// 3. PreparedStatement 꺼내오고
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				// 4. 질의명령 완성하고
+				pstmt.setInt(1, mno);
+				// 5. 질의명령 보내고 결과받고
+				rs = pstmt.executeQuery();
+				// 6. 결과에서 데이터꺼내고
+				// ==> 이 질의명령의 결과는 한행만 만들어 지므로 한행 내려서 처리하면 된다.
+				rs.next();
+				// 7. VO 데이터 담고
+				mVO.setMno(mno);
+				mVO.setName(rs.getString("name"));
+				mVO.setId(rs.getString("id"));
+				mVO.setMail(rs.getString("mail"));
+				mVO.setTel(rs.getString("tel"));
+				mVO.setGen(rs.getString("gen").equals("M") ? "남성" : "여성");
+				mVO.setAno(rs.getInt("ano"));
+				mVO.setAvatar(rs.getString("avatar"));
+				mVO.setjDate(rs.getDate("joindate"));
+				mVO.setjTime(rs.getTime("joindate"));
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(pstmt);
+				db.close(con);
+			}
+			
+			// 8. VO 내보내주고
+			return mVO;
+		}
 }
