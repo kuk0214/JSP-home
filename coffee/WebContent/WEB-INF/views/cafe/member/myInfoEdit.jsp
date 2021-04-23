@@ -30,7 +30,22 @@
 		$('#cbtn').click(function() {
 			$(location).attr('href', '/cafe/main.cafe'); 
 		});
-		$('[src="/cafe/img/avatar/${DATA.avatar}"]').parent().next().attr('checked', 'checked');
+		/* $('[src="/cafe/img/avatar/${DATA.avatar}"]').parent().next().attr('checked', 'checked'); */
+		$('#' + (${DATA.ano} - 10)).attr('checked', 'checked');
+		
+		$('#sbtn').click(function() {
+			var spw = $('#pw').val();
+			var smail = $('#mail').val();
+			var stel = $('#tel').val();
+			if(smail == '') {
+				$('#mail').val($('#mail').attr('placeholder'));
+			}
+			if(stel == '') {
+				$('#tel').val($('#tel').attr('placeholder'));
+			}
+			$('#frm').submit();
+		});
+		
 	});
 </script>
 </head>
@@ -82,7 +97,7 @@
 						 		<label for="mavt${idx}">
 						 			<img src="/cafe/img/avatar/img_avatar${idx}.png" class="w3-col avtimg">
 						 		</label>
-						 		<input type="radio" name="avt" id="mavt${idx}" value="${idx}">
+						 		<input type="radio" name="avt" id="${idx}" value="${idx}">
 						 	</div>
 				 	</c:forEach>
 						 </div>
@@ -94,7 +109,7 @@
 						 		<label for="favt${idx}">
 						 			<img src="/cafe/img/avatar/img_avatar${idx}.png" class="w3-col avtimg">
 						 		</label>
-						 		<input type="radio" name="avt" id="favt${idx}" value="${idx}">
+						 		<input type="radio" name="avt" id="${idx}" value="${idx}">
 						 	</div>
 				 	</c:forEach>
 				 		</div>
