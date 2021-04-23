@@ -28,7 +28,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#cbtn').click(function() {
-			$(location).attr('href', '/cafe/main.cafe');
+			$(location).attr('href', '/cafe/main.cafe'); 
 		});
 		$('[src="/cafe/img/avatar/${DATA.avatar}"]').parent().next().attr('checked', 'checked');
 	});
