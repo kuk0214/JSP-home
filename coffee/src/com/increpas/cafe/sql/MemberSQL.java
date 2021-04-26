@@ -8,6 +8,8 @@ public class MemberSQL {
 	public final int SEL_NO_INFO	= 1005;
 	public final int SEL_AVT_INFO	= 1006;
 	
+	public final int EDIT_MYINFO	= 2001;
+	
 	public final int ADD_MEMB		= 3001;
 	
 	public String getSQL(int code) {
@@ -68,6 +70,14 @@ public class MemberSQL {
 			buff.append("    avatar ");
 			buff.append("WHERE ");
 			buff.append("	gen = ?");
+			break;
+		case EDIT_MYINFO:
+			buff.append("UPDATE ");
+			buff.append("	member ");
+			buff.append("SET ");
+			buff.append("	### ");
+			buff.append("WHERE ");
+			buff.append("	id = ?");
 			break;
 		case ADD_MEMB:
 			buff.append("INSERT INTO ");

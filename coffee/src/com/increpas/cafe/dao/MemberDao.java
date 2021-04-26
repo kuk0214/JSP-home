@@ -300,4 +300,17 @@ public class MemberDao {
 			}
 			return list;
 		}
+		
+		// 내 정보 수정 데이터 베이스 작업 전담 처리함수
+		public int editMyInfo(HashMap<String, Object> map) {
+			int cnt = 0;
+			
+			
+			con = db.getCon();
+			String sql = mSQL.getSQL(mSQL.EDIT_MYINFO);
+			
+			
+			
+			return cnt;
+		}
 }

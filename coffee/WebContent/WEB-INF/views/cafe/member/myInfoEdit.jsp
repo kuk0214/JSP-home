@@ -290,7 +290,7 @@
 	<div class="w3-content mxw650 w3-center">
 		<h1 class="w3-padding w3-card-4 mgt20 w3-green">내 정보 수정</h1>
 		
-		<form method="POST" action="/cafe/member/infoEditProc.cafe" name="frm" id="frm">
+		<form method="POST" action="/cafe/member/myInfoEditProc.cafe" name="frm" id="frm">
 			<div class="w3-col w3-margin-top w3-card-4 w3-padding w3-round-large">
 				<div class="w3-col pdt10 w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey">회원번호 : </label>
