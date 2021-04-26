@@ -275,4 +275,29 @@ public class MemberDao {
 			// 8. VO 내보내주고
 			return mVO;
 		}
+		
+		// 아바타 정보 처리 함수
+		public ArrayList<MemberVO> getAvatarInfo(String gen) {
+			ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+			con = db.getCon();
+			String sql = mSQL.getSQL(mSQL.SEL_AVT_INFO);
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				pstmt.setString(1, gen);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					MemberVO mVO = new MemberVO();
+					mVO.setAno(rs.getInt("ano"));
+					mVO.setAvatar(rs.getString("avatar"));
+					list.add(mVO);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(pstmt);
+				db.close(con);
+			}
+			return list;
+		}
 }

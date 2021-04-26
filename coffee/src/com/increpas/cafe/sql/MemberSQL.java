@@ -6,6 +6,7 @@ public class MemberSQL {
 	public final int SEL_ID_INFO	= 1003;
 	public final int SEL_MEMB_LIST	= 1004;
 	public final int SEL_NO_INFO	= 1005;
+	public final int SEL_AVT_INFO	= 1006;
 	
 	public final int ADD_MEMB		= 3001;
 	
@@ -59,6 +60,14 @@ public class MemberSQL {
 			buff.append("	avt = ano ");
 			buff.append("	AND isshow = 'Y' ");
 			buff.append("	AND mno = ?");
+			break;
+		case SEL_AVT_INFO:
+			buff.append("SELECT ");
+			buff.append("    ano, savename avatar ");
+			buff.append("FROM ");
+			buff.append("    avatar ");
+			buff.append("WHERE ");
+			buff.append("	gen = ?");
 			break;
 		case ADD_MEMB:
 			buff.append("INSERT INTO ");
