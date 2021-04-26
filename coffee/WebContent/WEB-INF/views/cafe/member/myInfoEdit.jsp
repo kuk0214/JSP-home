@@ -27,9 +27,6 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#cbtn').click(function() {
-			$(location).attr('href', '/cafe/main.cafe'); 
-		});
 		/* $('[src="/cafe/img/avatar/${DATA.avatar}"]').parent().next().attr('checked', 'checked'); */
 		$('#${DATA.ano}').prop('checked', 'true');
 		
@@ -84,6 +81,26 @@
 			$('#pwMsg').addClass('w3-hide').html('');
 		});
 		
+		// 비밀번호 확인 이벤트
+		$('#repw').keyup(function() {
+			var spw = $('#pw').val();
+			var srepw = $(this).val()
+			if(!spw) {
+				// 비밀번호를 입력하지 않은 경우이므로
+				// 비밀번호 입력태그로 포커스를 이동시킨다.
+				$(this).val('');
+				$('#pw').focus();
+				return;
+			}
+			
+			if(spw != srepw) {
+				$('#repwMsg').addClass('w3-text-red').html('<small># 비밀번호가 일치하지 않습니다! #</small>').removeClass('w3-hide');
+				return;
+			}
+			
+			// 이 행을 실행하는 경우는 비밀번호와 확인이 일치하는 경우이다.
+			$('#repwMsg').addClass('w3-hide').removeClass('w3-text-red').html('');
+		});
 		
 		$('#mail').focusout(function() {
 			// 입력내용 읽고
@@ -135,13 +152,135 @@
 			$('#telMsg').removeClass('w3-text-red').html('');
 		});
 		
+		// Reset 버튼 이벤트 처리
+		$('#rbtn').click(function() {
+			document.frm.reset();
+			$('.msg').removeClass('w3-text-red').addClass('w3-hide').html('');
+			$('#${DATA.ano}').prop('checked', true);
+		})
 		
+		// Home 버튼 이벤트 처리
+		$('#hbtn').click(function() {
+			$(location).attr('href', '/cafe/main.cafe'); 
+		});
+		
+		// form submit 이벤트
 		$('#sbtn').click(function() {
+			// 비밀번호가 수정되었는지 확인
 			var spw = $('#pw').val();
-			var smail = $('#mail').val();
-			var stel = $('#tel').val();
+			var srepw = $('#repw').val();
+			if(!spw) {
+				// 이 경우는 비밀번호를 수정하지 않은 경우이다.
+				$('#pw').prop('disabled', true);
+				$('#repw').prop('disabled', true);
+			}
 			
-			$('#frm').submit();
+			if(spw != srepw) {
+				// 이 경우는 비밀번호 확인이 안된경우...
+				// 따라서 확인을 다시 하도록한다.
+				$('#repw').val('');
+				$('#repw').focus();
+				return;
+			}
+			
+			var pwresult = pwexp.test(spw);
+			if(spw && !pwresult) {
+				// 비밀번호를 다시 입력하도록 한다.
+				alert('* 비밀번호 형식이 맞지 않습니다! *');
+				$('#pw').val('');
+				$('#repw').val('');
+				$('#pw').focus();
+				
+			} else {
+				$('#repw').prop('disabled', true);
+			}
+			
+			// 메일 확인
+			var smail = $('#mail').val();
+			if(!smail) {
+				// 입력데이터가 없는 경우
+				alert('* 메일을 입력하세요! *');
+				$('#mail').focus();
+				return;
+			}
+			
+			// 정규표현식 검사
+			var exp = /^[a-zA-Z][a-zA-Z0-9#!*_]{1,14}\@[a-z]{2,15}\.[a-z]{2,3}([a-z]{2})?$/;
+			
+			var result = exp.test(smail);
+			
+			if(!result) {
+				$('#mail').val('');
+				alert('* 메일 형식에 맞지 않습니다! *');
+				$('#mail').focus();
+				return;
+			}
+			
+			if(smail == '${DATA.mail}') {
+				// 메일을 수정하지 않은 경우
+				// 따라서 이태그를 전송하지 않는다.
+				$('#mail').prop('disabled', true);
+			} 
+			
+			// 전화번호 확인
+			var stel = $('#tel').val();
+			if(!stel) {
+				alert('* 전화번호를 입력하세요! *');
+				$('#tel').focus();
+				return;
+			}
+			
+			var exp = /^0[0-9]{1,2}\-[0-9]{3,4}\-[0-9]{4}$/;
+			var result = exp.test(stel);
+			if(!result) {
+				// 전화번호 형식에 맞지 않은 경우...
+				$('#tel').val('');
+				
+				// 메세지 출력하고
+				alert('* 전화번호 형식에 맞지 않습니다! *');
+				$('#tel').focus();
+				return;
+			}
+			
+			if(stel == '${DATA.tel}') {
+				$('#tel').prop('disabled', true);
+			}
+			
+			// 아바타 수정 검사
+			var savt = $(':radio:checked').val();
+			if(!savt) {
+				alert('아바타를 선택하세요!');
+				return;
+			}
+			if(savt == '${DATA.ano}') {
+				// 아바타 변경 안한경우...
+				$(':radio').prop('disabled', true);
+			}
+			
+			// 한개도 데이터를 수정하지 않은 경우는 뷰로 다시 돌려보내자.
+			var result1 = spw;
+			var result2 = (smail == '${DATA.mail}');
+			var result3 = (stel == '${DATA.tel}');
+			var result4 = (savt == '${DATA.ano}');
+			
+			if(!(result1 || !result2 || !result3 || !result4)) {
+				// 이 경우는 수정한 데이터가 없는 경우이므로
+				// 뷰로 다시 돌려보낸다.
+				alert('# 수정된 데이터가 없습니다! #');
+				$('#pw').prop('disabled', '');
+				$('#repw').prop('disabled', '');
+				$('#mail').prop('disabled', '');
+				$('#tel').prop('disabled', '');
+				$(':radio').prop('disabled', '');
+				return;
+			}
+			
+			// 여기를 실행하면 데이터 유효성 검사에 통과한 경우이므로
+			// 폼태그를 전송한다.
+			var result = confirm('수정작업을 진행할까요?');
+			if(result) {
+				$('#frm').submit();				
+			}
 		});
 		
 	});
@@ -151,7 +290,7 @@
 	<div class="w3-content mxw650 w3-center">
 		<h1 class="w3-padding w3-card-4 mgt20 w3-green">내 정보 수정</h1>
 		
-		<div id="frm">
+		<form method="POST" action="/cafe/member/infoEditProc.cafe" name="frm" id="frm">
 			<div class="w3-col w3-margin-top w3-card-4 w3-padding w3-round-large">
 				<div class="w3-col pdt10 w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey">회원번호 : </label>
@@ -167,23 +306,23 @@
 				</div>
 				<div class="w3-col w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey">비밀번호 : </label>
-					<input type="password" id="pw" class="w3-col m9">
-					<span id="pwMsg" class="w3-col w3-hide"></span>
+					<input type="password" name="pw" id="pw" class="w3-col m9">
+					<span id="pwMsg" class="w3-col w3-hide msg"></span>
 				</div>
 				<div class="w3-col w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey">비번확인 : </label>
 					<input type="password" id="repw" class="w3-col m9">
-					<span id="repwMsg" class="w3-col w3-hide"></span>
+					<span id="repwMsg" class="w3-col w3-hide msg"></span>
 				</div>
 				<div class="w3-col w3-margin-top">
 					<label id="mail1" class="w3-col m3 w3-rigth-align w3-text-grey">메일주소 : </label>
-					<input type="text" id="mail" class="w3-col m9" value="${DATA.mail}">
-					<span id="mailMsg" class="w3-col"></span>
+					<input type="text" name="mail" id="mail" class="w3-col m9" value="${DATA.mail}">
+					<span id="mailMsg" class="w3-col msg"></span>
 				</div>
 				<div class="w3-col pdt10 w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey" id="telLbl">전화번호 : </label>
-					<input type="text" id="tel" class="w3-col m9" value="${DATA.tel}">
-					<span id="telMsg" class="w3-col"></span>
+					<input type="text" name="tel" id="tel" class="w3-col m9" value="${DATA.tel}">
+					<span id="telMsg" class="w3-col msg"></span>
 				</div>
 				<div class="w3-col w3-margin-top">
 					<label class="w3-col m3 w3-rigth-align w3-text-grey">회원성별 : </label>
@@ -205,11 +344,12 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		</form>
 
 		<div class="w3-col w3-margin-top w3-card-4 showFr">
-			<div class="w3-half w3-padding w3-green w3-button" id="cbtn">취소</div>
-			<div class="w3-half w3-padding w3-blue w3-hover-aqua w3-button" id="sbtn">확인</div>
+			<div class="w3-third w3-padding w3-orange w3-button" id="rbtn">Reset</div>
+			<div class="w3-third w3-padding w3-green w3-button" id="hbtn">Home</div>
+			<div class="w3-third w3-padding w3-blue w3-hover-aqua w3-button" id="sbtn">수정하기</div>
 		</div>		
 	</div>
 </body>
