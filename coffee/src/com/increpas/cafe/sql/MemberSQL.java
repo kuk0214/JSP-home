@@ -7,6 +7,7 @@ public class MemberSQL {
 	public final int SEL_MEMB_LIST	= 1004;
 	public final int SEL_NO_INFO	= 1005;
 	public final int SEL_AVT_INFO	= 1006;
+	public final int SEL_AVTMNO		= 1007;
 	
 	public final int EDIT_MYINFO	= 2001;
 	
@@ -70,6 +71,15 @@ public class MemberSQL {
 			buff.append("    avatar ");
 			buff.append("WHERE ");
 			buff.append("	gen = ?");
+			break;
+		case SEL_AVTMNO:
+			buff.append("SELECT ");
+			buff.append("	mno, savename avatar ");
+			buff.append("FROM ");
+			buff.append("	member, avatar ");
+			buff.append("WHERE ");
+			buff.append("	avt = ano ");
+			buff.append("	AND id = ?");
 			break;
 		case EDIT_MYINFO:
 			buff.append("UPDATE ");

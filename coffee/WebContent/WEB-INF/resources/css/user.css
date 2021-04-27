@@ -122,3 +122,7 @@
 .clrgrey {
 	color: #aaaa;
 }
+
+.noresize {
+	resize: none;
+}

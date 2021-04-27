@@ -19,16 +19,20 @@
 		<h1 class="w3-green w3-center w3-padding w3-margin-bottom">방명록 작성</h1>
 		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
 			<div class="w3-col box120 pdAll10 w3-border-right">
-				<img src="/cafe/img/avatar/noimage.jpg" class="inblock avtBox100">
+				<img src="/cafe/img/avatar/${DATA.avatar}" class="inblock avtBox100 w3-border w3-border-grey">
 			</div>
 			<div class="w3-rest w3-padding">
-				<div class="w3-col ">
-					<span class="w3-text-left ft10"><b>kieun</b></span>
+				<div class="w3-col w3-border-bottom">
+					<span class="w3-text-left mgb10 ft10"><b>${SID}</b></span>
 				</div>
-				<div class="w3-col">
-					<textarea class="w3-input w3-border" id="body" name="body" placeholder="남기고 싶은 글을 작성하세요!"></textarea>
+				<div class="w3-col w3-margin-top">
+					<textarea class="w3-input w3-border noresize" id="body" name="body" placeholder="남기고 싶은 글을 작성하세요!"></textarea>
 				</div>
 			</div>
+		</div>
+		<div class="w3-col w3-margin-top">
+			<div class="w3-col m2 w3-button w3-green w3-card-4" id="hbtn">Home</div>
+			<div class="w3-col m2 w3-button w3-blue w3-right w3-card-4" id="wbtn">Write</div>
 		</div>
 	</div>
 </body>
