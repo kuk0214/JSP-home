@@ -27,7 +27,7 @@
 
 /* 마진 클래스 */
 .mg0 {
-	margin-top: 0px;
+	margin: 0px;
 }
 .mgt10 {
 	margin-top: 10px;
@@ -59,6 +59,9 @@
 	padding: 20px;
 }
 
+.pdt5 {
+	padding-top: 5px;
+}
 .pdt10 {
 	padding-top: 10px;
 }
@@ -74,10 +77,6 @@
 	padding-bottom: 30px;
 }
 
-.pdt5 {
-	padding-top: 5px;
-}
-
 /* size */
 .w250 {
 	width: 250px;
@@ -88,6 +87,11 @@
 .w100 {
 	width: 100px;
 }
+
+.h20 {
+	height: 20px;
+}
+
 .box250 {
 	width: 250px;
 	height: 250px;
@@ -109,6 +113,12 @@
 	height: auto;
 }
 
+.ft8 {
+	font-size: 8pt;
+}
+.ft10 {
+	font-size: 10pt;
+}
 .ft12 {
 	font-size: 12pt;
 }
@@ -119,4 +129,16 @@
 }
 .clrgrey {
 	color: #aaaaaa;
+}
+.box120 {
+	width: 120px;
+	height: 120px;
+}
+.avtBox100 {
+	width: 100px;
+	height: auto;
+}
+
+.noresize {
+	resize: none;
 }

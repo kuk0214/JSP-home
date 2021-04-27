@@ -17,7 +17,19 @@
 		});
 		
 		$('#wbtn').click(function() {
-			document.frm.submit();
+			$(location).attr('href', '/cafe/gboard/gBoardWrite.cafe');
+		});
+		
+		$('#outbtn').click(function() {
+			$(location).attr('href', '/cafe/member/logout.cafe');
+		});
+		
+		$('#lbtn').click(function() {
+			$(location).attr('href', '/cafe/member/login.cafe');
+		});
+		
+		$('#jbtn').click(function() {
+			$(location).attr('href', '/cafe/member/join.cafe');
 		});
 	});
 </script>
