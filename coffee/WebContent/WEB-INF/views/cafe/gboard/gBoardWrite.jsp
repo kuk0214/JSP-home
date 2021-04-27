@@ -11,13 +11,24 @@
 <script type="text/javascript" src="/cafe/js/w3color.js"></script>
 <style type="text/css"></style>
 <script type="text/javascript">
-
+	$(document).ready(function() {
+		$('#hbtn').click(function() {
+			$(location).attr('href', '/cafe/main.cafe');
+		});
+		
+		$('#wbtn').click(function() {
+			document.frm.submit();
+		});
+	});
 </script>
 </head>
 <body>
 	<div class="w3-content mxw650 w3-maring-top">
 		<h1 class="w3-green w3-center w3-padding w3-margin-bottom">방명록 작성</h1>
-		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
+		
+		<form method="POST" action="/cafe/gboard/gBoardWriteProc.cafe" name="frm" id="frm"
+				class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
+			<input type="hidden" name="mno" value="${DATA.mno}">
 			<div class="w3-col box120 pdAll10 w3-border-right">
 				<img src="/cafe/img/avatar/${DATA.avatar}" class="inblock avtBox100 w3-border w3-border-grey">
 			</div>
@@ -29,7 +40,7 @@
 					<textarea class="w3-input w3-border noresize" id="body" name="body" placeholder="남기고 싶은 글을 작성하세요!"></textarea>
 				</div>
 			</div>
-		</div>
+		</form>
 		<div class="w3-col w3-margin-top">
 			<div class="w3-col m2 w3-button w3-green w3-card-4" id="hbtn">Home</div>
 			<div class="w3-col m2 w3-button w3-blue w3-right w3-card-4" id="wbtn">Write</div>
