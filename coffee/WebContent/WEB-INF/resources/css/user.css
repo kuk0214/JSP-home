@@ -20,22 +20,26 @@
 	max-width: 800px;
 }
 
-
 /* 디스플레이 */
 .inblock {
 	display: inline-block;
 }
 
-
 /* 마진 클래스 */
+.mg0 {
+	margin-top: 0px;
+}
 .mgt10 {
 	margin-top: 10px;
 }
 .mgt20 {
 	margin-top: 20px;
 }
+.mgb0 {
+	margin-bottom: 0px;
+}
 .mgb10 {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .mgb20 {
 	margin-bottom: 20px;
@@ -47,7 +51,6 @@
 	margin-left: 20px;
 }
 
-
 /* 패딩 클래스*/
 .pdAll10 {
 	padding: 10px;
@@ -55,6 +58,7 @@
 .pdAll20 {
 	padding: 20px;
 }
+
 .pdt10 {
 	padding-top: 10px;
 }
@@ -64,25 +68,26 @@
 .pdl20 {
 	padding-left: 20px;
 }
+
 .pdv30 {
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
+
 .pdt5 {
 	padding-top: 5px;
 }
-
 
 /* size */
 .w250 {
 	width: 250px;
 }
-
-.box120 {
-	width: 120px;
-	height: 120px;	
+.w150 {
+	width: 150px;
 }
-
+.w100 {
+	width: 100px;
+}
 .box250 {
 	width: 250px;
 	height: 250px;
@@ -91,6 +96,7 @@
 	width: 100px;
 	height: 100px;
 } 
+
 .imgBox230 {
 	width: 230px;
 	height: 230px;
@@ -102,27 +108,15 @@
 	width: 230px;
 	height: auto;
 }
-.avtBox100 {
-	width: 100px;
-	height: auto;
-}
-.ft8 {
-	font-size: 8pt;
-}
-.ft10 {
-	font-size: 10pt;
-}
+
 .ft12 {
 	font-size: 12pt;
 }
+
 .ft14 {
 	font-size: 14pt;
 	font-weight: bold;
 }
 .clrgrey {
-	color: #aaaa;
-}
-
-.noresize {
-	resize: none;
+	color: #aaaaaa;
 }

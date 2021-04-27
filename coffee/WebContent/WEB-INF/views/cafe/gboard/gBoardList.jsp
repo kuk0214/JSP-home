@@ -24,7 +24,22 @@
 </head>
 <body>
 	<div class="w3-content mxw650 w3-maring-top">
-		<h1 class="w3-green w3-center w3-padding w3-margin-bottom">방명록 작성</h1>
+		<header class="w3-col w3-card-4 mgb20">
+			<h1 class="w3-green w3-center w3-padding mg0">방명록 작성</h1>
+		<nav class="w3-bar w3-pale-yellow">
+			<div class="w3-col w150 w3-left w3-button w3-amber" id="hbtn">home</div>
+<c:if test="${not empty SID}">
+	<c:if test="${CNT == 0}">
+			<div class="w3-col w150 w3-left w3-button w3-light-green w3-right" id="wbtn">글작성</div>
+	</c:if>
+			<div class="w3-col w150 w3-left w3-button w3-lime w3-right" id="outbtn">logout</div>
+</c:if>
+<c:if test="${empty SID}">
+			<div class="w3-col w150 w3-left w3-button w3-deep-orange w3-right" id="lbtn">login</div>
+			<div class="w3-col w150 w3-left w3-button w3-yellow w3-right" id="jbtn">join</div>
+</c:if>
+		</nav>
+		</header>
 		
 <c:forEach var="data" items="${LIST}">
 		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">

@@ -323,6 +323,9 @@ public class MemberDao {
 							만약 비밀번호와 아바타를 변경한 경우
 								"1pw", pw
 								"2avt", avt
+								
+							만약 아바타 번호를 꺼내는 경우에는 정수로 변환해줘야 할 것이고
+							나머지 경우는 문자열로 변환해주면 된다.
 						 */
 						pstmt.setInt(i+1, (int) map.get(key));
 					} else {
@@ -378,7 +381,7 @@ public class MemberDao {
 						mail = ?
 					WHERE
 						id = ?
-				따라서 이 함수는 
+				따라서 이 함수는 ### 대신 전달된 데이터에 따라서 변경되는 부분만 만들어서 반환해주는 함수이다.
 			 */
 			return sql;
 		}

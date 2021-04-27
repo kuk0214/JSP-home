@@ -55,5 +55,61 @@ public class GuestBoardDao {
 		}
 		return mVO;
 	}
-
+	
+	// 방명록 리스트 조회 전담 처리함수
+	public ArrayList<BoardVO> getGBoardList() {
+		// 반환값 변수 만들고
+		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
+		// 커넥션 꺼내오고
+		con = db.getCon();
+		// 질의명령 가져오고
+		String sql = gSQL.getSQL(gSQL.SEL_ALL_LIST);
+		//  스테이트먼트 준비하고
+		stmt = db.getSTMT(con);
+		try {
+			// 질의명령 보내고 결과 받고
+			rs = stmt.executeQuery(sql);
+			// 결과에서 데이터 반복해서 꺼내서 VO담고
+			while(rs.next()) {
+				BoardVO gVO = new BoardVO();
+				gVO.setGno(rs.getInt("gno"));
+				gVO.setMno(rs.getInt("mno"));
+				gVO.setId(rs.getString("id"));
+				gVO.setAvatar(rs.getString("avatar"));
+				gVO.setBody(rs.getString("body"));
+				gVO.setSdate(rs.getDate("wdate"));
+				// VO가 완성되면 list에 담고
+				list.add(gVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		// 반환값 변환하고
+		return list;
+	}
+	
+	// 작성글 카운트 조회 전담 처리함수
+	public int getWirteCount(String id) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = gSQL.getSQL(gSQL.SEL_MY_CNT);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 }

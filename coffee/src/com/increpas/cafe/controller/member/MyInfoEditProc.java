@@ -56,8 +56,10 @@ public class MyInfoEditProc implements CafeController {
 		int cnt = mDao.editMyInfo(map);
 		
 		if(cnt == 1) {
+			// 정보수정에 성공한 경우
 			view = "/cafe/member/myInfo.cafe";
 		} else {
+			// 정보수정에 실패한 경우
 			view = "/cafe/member/myInfoEdit.cafe";
 		}
 		
