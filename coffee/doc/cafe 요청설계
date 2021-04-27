@@ -103,3 +103,9 @@
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
 	뷰			: /WEB=INF/views/cafe/gboard/gBoardWrite.jsp
 							
+12. 방명록 리스트 보기 요청
+	요청내용	: http://localhost/cafe/gboard/gBoardList.cafe
+	파라미터	: 무(SID)
+	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
+	뷰			: /WEB=INF/views/cafe/gboard/gBoardList.jsp
+							
