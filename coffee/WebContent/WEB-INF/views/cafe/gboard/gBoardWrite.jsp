@@ -45,6 +45,30 @@
 			<div class="w3-col m2 w3-button w3-green w3-card-4" id="hbtn">Home</div>
 			<div class="w3-col m2 w3-button w3-blue w3-right w3-card-4" id="wbtn">Write</div>
 		</div>
+		
+		<!-- 방명록 작성 처리 실패시 메세지 처리 -->
+	<c:if test="${not empty MSG}">
+		<div id="msgWin" class="w3-modal">
+			<div class="w3-modal-content mxw600 w3-card-4">
+				<header class="w3-container w3-red">
+					<span class="w3-button w3-display-topright" id="closeBtn">&times;</span>
+					<h2>방명록 작성 실패</h2>
+				</header>
+				<div class="w3-container w3-margin-bottom">
+					<h3 class="w3-padding w3-text-red">방명록 작성에 실패했습니다!</h3>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#msgWin').css('display', 'block');
+				
+				$('#closeBtn').click(function() {
+					$('#msgWin').css('display', 'none');
+				});
+			});
+		</script>
+	</c:if>
 	</div>
 </body>
 </html>

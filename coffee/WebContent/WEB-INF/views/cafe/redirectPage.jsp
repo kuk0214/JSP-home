@@ -31,6 +31,18 @@
 	});
 </script>
 </c:if>
+
+<%-- 방명록 작성 실패 리다이렉트 처리 --%>
+<c:if test="${not empty WMSG}">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#frm').attr('action', '/cafe/gboard/gBoardWrite.cafe');
+		$('#frm').append('<input type="hidden" name="msg" value="${WMSG}">');
+		$('#frm').submit();
+	});
+</script>
+</c:if>
+
 </head>
 <body>
 	<form method="post" name="frm" id="frm"></form>

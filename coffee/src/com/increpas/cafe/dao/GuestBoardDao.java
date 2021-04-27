@@ -112,4 +112,23 @@ public class GuestBoardDao {
 		}
 		return cnt;
 	}
+	
+	// 방명록 글 작성 데이터 베이스 전담 처리함수
+	public int addGBRD(BoardVO gVO) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = gSQL.getSQL(gSQL.ADD_GBRD);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, gVO.getMno());
+			pstmt.setString(2, gVO.getBody());
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 }

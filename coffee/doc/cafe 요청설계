@@ -85,13 +85,11 @@
 	요청내용	: http://localhost/cafe/member/myInfoEditProc.cafe
 	파라미터	: pw || mail || tel || avt
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfoEditProc
-	뷰			: 
-					redirect ]
-					
-							성공 ]
-									http://localhost/cafe/member/myInfo.cafe
-							실패 ]
-									http://localhost/cafe/member/myInfoEdit.cafe
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/member/myInfo.cafe
+						실패 ]
+								http://localhost/cafe/member/myInfoEdit.cafe
 
 ==================================================================================================================				
 
@@ -102,8 +100,18 @@
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
 	뷰			: /WEB=INF/views/cafe/gboard/gBoardWrite.jsp
+	
+12. 방명록 작성 처리 요청
+	요청내용	: http://localhost/cafe/gboard/gBoardWriteProc.cafe
+	파라미터	: writer, body
+	컨트롤러	: com.increpas.cafe.controller.gboard.GBoardWriteProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/gboard/gBoardList.cafe
+						실패 ]
+								http://localhost/cafe/member/gBoardWrite.cafe
 							
-12. 방명록 리스트 보기 요청
+13. 방명록 리스트 보기 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardList.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
