@@ -308,9 +308,78 @@ public class MemberDao {
 			
 			con = db.getCon();
 			String sql = mSQL.getSQL(mSQL.EDIT_MYINFO);
+			Set<String> set = (Set<String>) map.keySet();
+			ArrayList<String> list = new ArrayList<String>(set);
+			Collections.sort(list);
+			sql = sql.replaceAll("###", getParam(list));
 			
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				for(int i = 0 ; i < list.size(); i++ ) {
+					String key = list.get(i);
+					if(key.substring(1).equals("avt")) {
+						/*
+							맵에는 키값들이 정렬을 위해서
+							만약 비밀번호와 아바타를 변경한 경우
+								"1pw", pw
+								"2avt", avt
+						 */
+						pstmt.setInt(i+1, (int) map.get(key));
+					} else {
+						pstmt.setString(i+1, (String) map.get(key));
+					}
+				}
+				
+				cnt = pstmt.executeUpdate();
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(pstmt);
+				db.close(con);
+			}
 			
 			
 			return cnt;
+		}
+		
+		// 내 정보 수정 sql 완성하는 함수
+		public String getParam(ArrayList<String> list) {
+			String sql = "";
+			for(int i = 0 ; i <list.size() - 1 ; i++ ) {
+				if(i != 0) {
+					sql = sql + ", ";
+				}
+				sql = sql + list.get(i).substring(1) + " = ? ";
+			}
+			
+			/*
+				MemberSQL에서 반환해준 질의명령 문자열은
+					UPDATE
+						member
+					SET
+						###
+					WHERE
+						id = ?
+				였고
+				
+				만약 비밀번호만 수정했다면
+					UPDATE
+						member
+					SET
+						pw = ?
+					WHERE
+						id = ?
+				만약 비밀번호와 메일만 수정한 경우는
+				"###" 대신 우리가 필요한 문자열은
+					UPDATE
+						member
+					SET
+						pw = ?,
+						mail = ?
+					WHERE
+						id = ?
+				따라서 이 함수는 
+			 */
+			return sql;
 		}
 }

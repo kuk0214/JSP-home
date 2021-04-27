@@ -11,9 +11,9 @@
 	요청내용	:	http://localhost/cafe/main.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.CafeMain
-	뷰			:	/WEB-INF/views/cafe/main.jsp
+	뷰			:	/WEB=INF/views/cafe/main.jsp
 	
--------------------------------------------------------------------------------------------------------------------
+===================================================================================================================
 
 # 회원 관련 요청 설계
 
@@ -21,13 +21,13 @@
 	요청내용	:	http://localhost/cafe/member/login.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.member.LoginFrom
-	뷰			:	/WEB-INF/views/cafe/member/login.jsp
+	뷰			:	/WEB=INF/views/cafe/member/login.jsp
 	
 2. 회원가입 폼보기 요청
 	요청내용	:	http://localhost/cafe/member/join.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.member.JoinFrom
-	뷰			:	/WEB-INF/views/cafe/member/join.jsp
+	뷰			:	/WEB=INF/views/cafe/member/join.jsp
 
 3. 로그아웃 
 	요청내용	:	http://localhost/cafe/member/logout.cafe
@@ -61,25 +61,25 @@
 	요청내용	: http://localhost/cafe/member/myInfo.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfo
-	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
+	뷰			: /WEB=INF/views/cafe/member/memberInfo.jsp
 	
 7. 회원 목록 보기 요청
 	요청내용	: http://localhost/cafe/member/memberList.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MemberList
-	뷰			: /WEB-INF/views/cafe/member/memberList.jsp
+	뷰			: /WEB=INF/views/cafe/member/memberList.jsp
 	
 8. 회원 정보 보기 요청
 	요청내용	: http://localhost/cafe/member/memberInfo.cafe
 	파라미터	: mno
 	컨트롤러	: com.increpas.cafe.controller.member.MemberInfo
-	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
+	뷰			: /WEB=INF/views/cafe/member/memberInfo.jsp
 
 9. 내 정보 수정 보기 요청
 	요청내용	: http://localhost/cafe/member/myInfoEdit.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfoEdit
-	뷰			: /WEB-INF/views/cafe/member/myInfoEdit.jsp
+	뷰			: /WEB=INF/views/cafe/member/myInfoEdit.jsp
 
 10. 내 정보 수정 처리 요청
 	요청내용	: http://localhost/cafe/member/myInfoEditProc.cafe
@@ -92,4 +92,14 @@
 									http://localhost/cafe/member/myInfo.cafe
 							실패 ]
 									http://localhost/cafe/member/myInfoEdit.cafe
+
+==================================================================================================================				
+
+# 방명록 요청 설계
+
+11. 방명록 작성 폼보기 요청
+	요청내용	: http://localhost/cafe/gboard/gBoardWrite.cafe
+	파라미터	: 무(SID)
+	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
+	뷰			: /WEB=INF/views/cafe/gboard/gBoardWrite.jsp
 							

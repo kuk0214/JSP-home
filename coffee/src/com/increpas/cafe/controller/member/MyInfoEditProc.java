@@ -32,21 +32,34 @@ public class MyInfoEditProc implements CafeController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// map 에 데이터 담고
+		int no = 1;
+		
 		if(pw != null) {
-			map.put("pw", pw);
+			map.put(no++ + "pw", pw);
 		}
 		
 		if(mail != null) {
-			map.put("mail", mail);
+			map.put(no++ + "mail", mail);
 		}
 		
 		if(tel != null) {
-			map.put("tel", tel);
+			map.put(no++ + "tel", tel);
 		}
+		
+		if(avt != null) {
+			map.put(no++ + "avt", Integer.parseInt(avt));
+		}
+		map.put(no++ + "sid", sid);
 		
 		
 		MemberDao mDao = new MemberDao();
 		int cnt = mDao.editMyInfo(map);
+		
+		if(cnt == 1) {
+			view = "/cafe/member/myInfo.cafe";
+		} else {
+			view = "/cafe/member/myInfoEdit.cafe";
+		}
 		
 		return view;
 	}
