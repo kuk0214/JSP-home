@@ -104,16 +104,16 @@
 12. 방명록 작성 처리 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardWriteProc.cafe
 	파라미터	: writer, body
-	컨트롤러	: com.increpas.cafe.controller.gboard.GBoardWriteProc
+	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWriteProc
 	뷰			: redirect ]
 						성공 ]
 								http://localhost/cafe/gboard/gBoardList.cafe
 						실패 ]
-								http://localhost/cafe/member/gBoardWrite.cafe
+								http://localhost/cafe/gboard/gBoardWrite.cafe
 							
 13. 방명록 리스트 보기 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardList.cafe
-	파라미터	: 무(SID)
+	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
 	뷰			: /WEB=INF/views/cafe/gboard/gBoardList.jsp
 							

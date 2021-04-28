@@ -14,8 +14,10 @@ CREATE TABLE guestBoard(
 );
 
 INSERT INTO
-    guestBoard(gno, wirter, body)
+    guestBoard(gno, writer, body)
 VALUES(
     (SELECT NVL(MAX(gno) + 1, 1001) FROM guestBoard),
     1001, '이제부터 시작~~~!'
 );
+
+commit;

@@ -26,7 +26,7 @@ public class GuestBoardDao {
 		gSQL = new GuestBoardSQL();
 	}
 	
-	// 로그인 회원 정보 조회 전담 처리함수
+	// 로그인 회원 정보 조회 전담 처리 함수
 	public MemberVO getMemberData(String id) {
 		MemberVO mVO = new MemberVO();
 		
@@ -56,7 +56,7 @@ public class GuestBoardDao {
 		return mVO;
 	}
 	
-	// 방명록 리스트 조회 전담 처리함수
+	// 방명록 리스트 조회 전담 처리 함수
 	public ArrayList<BoardVO> getGBoardList() {
 		// 반환값 변수 만들고
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
@@ -92,8 +92,8 @@ public class GuestBoardDao {
 		return list;
 	}
 	
-	// 작성글 카운트 조회 전담 처리함수
-	public int getWirteCount(String id) {
+	// 작성글 카운트 조회 전담 처리 함수
+	public int getWriteCount(String id) {
 		int cnt = 0;
 		con = db.getCon();
 		String sql = gSQL.getSQL(gSQL.SEL_MY_CNT);
@@ -113,7 +113,7 @@ public class GuestBoardDao {
 		return cnt;
 	}
 	
-	// 방명록 글 작성 데이터 베이스 전담 처리함수
+	// 방명록 글 작성 데이터 베이스 전담 처리 함수
 	public int addGBRD(BoardVO gVO) {
 		int cnt = 0;
 		con = db.getCon();

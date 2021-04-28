@@ -7,16 +7,16 @@ import com.increpas.cafe.controller.CafeController;
 import com.increpas.cafe.dao.GuestBoardDao;
 import com.increpas.cafe.vo.BoardVO;
 
-public class GBoardWriteProc implements CafeController {
+public class GuestWriteProc implements CafeController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		int writer = Integer.parseInt(req.getParameter("mno"));
-		String sbody = req.getParameter("body");
+		String body = req.getParameter("body");
 		
 		BoardVO gVO = new BoardVO();
 		gVO.setMno(writer);
-		gVO.setBody(sbody);
+		gVO.setBody(body);
 		
 		GuestBoardDao gDao = new GuestBoardDao();
 		int cnt = gDao.addGBRD(gVO);

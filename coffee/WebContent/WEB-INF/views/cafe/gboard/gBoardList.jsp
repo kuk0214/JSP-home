@@ -12,7 +12,8 @@
 <style type="text/css"></style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#hbtn').click(function() {
+		// 각각의 태그에 이벤트를 적용시키는 방법(<== 해당 태그를 선택해서 처리하는 방법)
+		/* $('#hbtn').click(function() {
 			$(location).attr('href', '/cafe/main.cafe');
 		});
 		
@@ -30,6 +31,32 @@
 		
 		$('#jbtn').click(function() {
 			$(location).attr('href', '/cafe/member/join.cafe');
+		}); */
+		
+		// 여러태그를 동시에 이벤트를 처리하는 방법
+		$('.w3-button').click(function() {
+			// 이렇게 선택하면 클래스에 w3-button 이 추가되어있는 태그는 모두 선택하고
+			// 선택된 태그들에 클릭 이벤트를 등록하게 된다.
+			var tid = $(this).attr('id');
+			var url = '';
+			switch (tid) {
+			case 'hbtn':
+				url = '/cafe/main.cafe';
+				break;
+			case 'wbtn': 
+				url = '/cafe/gboard/gBoardWrite.cafe';
+				break;
+			case 'outbtn': 
+				url = '/cafe/member/logout.cafe';
+				break;
+			case 'lbtn': 
+				url = '/cafe/member/login.cafe';
+				break;
+			case 'jbtn': 
+				url = '/cafe/member/join.cafe';
+				break;
+			}
+			$(location).attr('href', url);
 		});
 	});
 </script>

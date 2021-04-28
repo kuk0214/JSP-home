@@ -40,6 +40,7 @@ public class JoinProc implements CafeController {
 		if(cnt == 1) {
 			HttpSession session = req.getSession();
 			session.setAttribute("SID", sid);
+			req.setAttribute("isRedirect", true);
 		} else {
 			view = "redirectPage";
 			req.setAttribute("JOINMSG", "fail");

@@ -17,6 +17,11 @@
 		});
 		
 		$('#wbtn').click(function() {
+			var sbody = $('#body').val();
+			if(!sbody) {
+				alert('내용을 입력해주세요!');
+				return;
+			}
 			document.frm.submit();
 		});
 	});

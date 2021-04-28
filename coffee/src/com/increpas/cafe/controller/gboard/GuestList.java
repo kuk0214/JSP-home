@@ -22,7 +22,7 @@ public class GuestList implements CafeController {
 		String sid = (String) req.getSession().getAttribute("SID");
 		int cnt = 0 ;
 		if(sid != null) {
-			cnt = gDao.getWirteCount(sid);				
+			cnt = gDao.getWriteCount(sid);				
 		}
 		// 데이터 뷰에 넘겨주고
 		req.setAttribute("LIST", list);
