@@ -52,14 +52,15 @@ commit;
 
 -- 계층 조회 질의명령
 SELECT
-    rno, title, body, wmno, upno, wdate,
-    level -1 as step
+    rno, mno, id, savename avatar, title, body, wmno, upno, wdate, level -1 as step
 FROM
-    reboard
+    reboard r, member m, avatar a
 WHERE
-    isshow = 'Y'
+    wmno = mno
+    AND avt = ano
+    AND r.isshow = 'Y'
 START WITH
     upno IS NULL
 CONNECT BY
-    PRIOR rno = upno
+    PRIOR rno = upno    
 ;

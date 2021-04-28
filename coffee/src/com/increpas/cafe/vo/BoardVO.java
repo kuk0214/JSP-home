@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.text.*;
 
 public class BoardVO {
-	private int gno, rno, bno, mno, ano, cnt, step;
+	private int gno, rno, bno, mno, ano, cnt, step, upno;
 	private String id, name, title, body, sdate, avatar;
 	private Date wdate;
 	private Time wtime;
@@ -50,6 +50,12 @@ public class BoardVO {
 	}
 	public void setStep(int step) {
 		this.step = step;
+	}
+	public int getUpno() {
+		return upno;
+	}
+	public void setUpno(int upno) {
+		this.upno = upno;
 	}
 	public String getId() {
 		return id;

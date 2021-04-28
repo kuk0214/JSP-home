@@ -80,13 +80,25 @@
 			$(location).attr('href', url);
 		});
 		
-		// cafe board 버튼 이벤트 처리
+		// cafe gboard 버튼 이벤트 처리
 		$('.cafeGBtn').click(function() {
 			var tid = $(this).attr('id');
 			var url = '';
 			switch(tid) {
 			case 'gboard':
 				url = '/cafe/gboard/gBoardList.cafe'
+				break;
+			}
+			$(location).attr('href', url);
+		});
+		
+		// cafe rboard 버튼 이벤트 처리
+		$('.cafeRBtn').click(function() {
+			var tid = $(this).attr('id');
+			var url = '';
+			switch(tid) {
+			case 'reboard':
+				url = '/cafe/reboard/reBoardList.cafe'
 				break;
 			}
 			$(location).attr('href', url);
@@ -187,6 +199,16 @@
 				<div class="w3-col s8">
 					<div class="w3-col w3-blue w3-margin-bottom w3-button cafeGBtn" id="gboard">
 						<h4>방명록 리스트</h4>
+					</div>
+				</div>
+			</div>
+			
+		<!--  댓글 게시판 링크 버튼 추가 장소 -->
+			<div class="w3-col w3-padding w3-border-bottom">
+				<h4 class="w3-col s4 w3-text-grey">댓글 게시판</h4>
+				<div class="w3-col s8">
+					<div class="w3-col w3-cyan w3-margin-bottom w3-button cafeRBtn" id="reboard">
+						<h4>댓글 게시판 리스트</h4>
 					</div>
 				</div>
 			</div>

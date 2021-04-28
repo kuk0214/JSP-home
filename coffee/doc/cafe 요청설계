@@ -95,15 +95,15 @@
 
 # 방명록 요청 설계
 
-11. 방명록 작성 폼보기 요청
+1. 방명록 작성 폼보기 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardWrite.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
 	뷰			: /WEB=INF/views/cafe/gboard/gBoardWrite.jsp
 	
-12. 방명록 작성 처리 요청
+2. 방명록 작성 처리 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardWriteProc.cafe
-	파라미터	: writer, body
+	파라미터	: mno, body
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWriteProc
 	뷰			: redirect ]
 						성공 ]
@@ -111,7 +111,7 @@
 						실패 ]
 								http://localhost/cafe/gboard/gBoardWrite.cafe
 							
-13. 방명록 리스트 보기 요청
+3. 방명록 리스트 보기 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardList.cafe
 	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
@@ -119,10 +119,42 @@
 
 ==================================================================================================================				
 
-# 댓글게시판 요청 설계	
+# 댓글 게시판 요청 설계	
 
-14. 댓글 게시판 리스트 보기 요청	
+1. 댓글 게시판 리스트 보기 요청	
 	요청내용	: http://localhost/cafe/reboard/reBoardList.cafe
 	파라미터	: 무
-	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
-	뷰			: /WEB=INF/views/cafe/reboard/reBoardList.jsp		
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardList
+	뷰			: /WEB=INF/views/cafe/reboard/reBoardList.jsp
+			
+2. 게시글 쓰기 폼보기 요청	
+	요청내용	: http://localhost/cafe/reboard/reBoardWrite.cafe
+	파라미터	: 무
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardWrite
+	뷰			: /WEB=INF/views/cafe/reboard/reBoardWrite.jsp
+			
+3. 게시글 등록 처리 요청	
+	요청내용	: http://localhost/cafe/reboard/reBoardWriteProc.cafe
+	파라미터	: title, body
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardWriteProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/reboard/reBoardList.cafe
+						실패 ]
+								http://localhost/cafe/reboard/reBoardWrite.cafe
+			
+4. 댓글 쓰기 폼보기 요청	
+	요청내용	: http://localhost/cafe/reboard/reBoardReply.cafe
+	파라미터	: rno
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardReply
+	뷰			: /WEB=INF/views/cafe/reboard/reBoardWrite.jsp
+			
+5. 댓글 등록 처리 요청	
+	요청내용	: http://localhost/cafe/reboard/reBoardReplyProc.cafe
+	파라미터	: upno, title, body
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardReplyProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/reboard/reBoardList.cafe
+						실패 ]
+								http://localhost/cafe/reboard/reBoardReply.cafe

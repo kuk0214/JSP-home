@@ -9,7 +9,11 @@
 <link rel="stylesheet" type="text/css" href="/cafe/css/user.css">
 <script type="text/javascript" src="/cafe/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/cafe/js/w3color.js"></script>
-<style type="text/css"></style>
+<style type="text/css">
+	.rebtn {
+		padding: 4px 14px;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 각각의 태그에 이벤트를 적용시키는 방법(<== 해당 태그를 선택해서 처리하는 방법)
@@ -58,13 +62,20 @@
 			}
 			$(location).attr('href', url);
 		});
+		
+		$('#wbtn').click(function() {
+			$(location).attr('href', '/cafe/reboard/reBoardWrite.cafe');
+		});
 	});
 </script>
 </head>
 <body>
+	<form method="POST" action="/cafe/reBoard/reBoardReply.cafe" id="frm" name="frm">
+		<input type="hidden" name="rno" id="rno">
+	</form>
 	<div class="w3-content mxw650 w3-maring-top">
 		<header class="w3-col w3-card-4 mgb20">
-			<h1 class="w3-green w3-center w3-padding mg0">방명록 작성</h1>
+			<h1 class="w3-green w3-center w3-padding mg0">댓글 게시판</h1>
 		<nav class="w3-bar w3-pale-yellow">
 			<div class="w3-col w150 w3-left w3-button w3-amber" id="hbtn">home</div>
 <c:if test="${not empty SID}">
@@ -80,25 +91,27 @@
 		
 <c:forEach var="data" items="${LIST}">
 		<div class="w3-col" style="padding-left: ${data.step * 70}px;">
-			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
-				<div class="w3-col box120 pdAll10 w3-border-right">
+			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding">
+				<div class="w3-col w3-center box120 pdAll10 w3-border-right">
 					<img src="/cafe/img/avatar/${data.avatar}" class="inblock avtBox100 w3-border w3-border-grey">
-					<span class="w3-text-left mgb10 ft10"><b>${data.id}</b></span>
+					<span class="w3-col mgt10 ft10"><b>${data.id}</b></span>
 				</div>
 				<div class="w3-rest w3-padding">
 					<div class="w3-col w3-border-bottom w3-border-grey">
 						<div class="w3-col w3-border-bottom">
-							<span class="w3-col mgt10 ft10">${data.title}</span>
+							<span class="mgt10 ft10"><b>${data.title}</b></span>
 							<span class="w3-right mgb10 ft10">${data.sdate}</span>
 						</div>
 						<div class="w3-col w3-margin-top">
 							<span class="w3-col w3-padding ft12">${data.body}</span>
 						</div>
 					</div>
-					<div class="w3-col w3-margin-top">
-						<span class="w3-button w3-blue w3-tiny w3-left rebtn" id="r${data.rno}">댓글달기</span>
-						<span class="w3-button w3-green w3-tiny w3-right mgl10 rebtn" id="e${data.rno}" }>수정하기</span>
-						<span class="w3-button w3-red w3-tiny w3-right rebtn" id="d${data.rno}">삭제하기</span>
+					<div class="w3-col mgt10">
+						<span class="w3-button w3-blue w3-small w3-round-medium w3-left rebtn" id="r${data.rno}">댓글달기</span>
+				<c:if test="${SID == data.id}">
+						<span class="w3-button w3-green w3-small w3-round-medium w3-right mgl10 rebtn" id="e${data.rno}" }>수정하기</span>
+						<span class="w3-button w3-red w3-small w3-round-medium w3-right rebtn" id="">삭제하기</span>
+				</c:if>
 					</div>
 				</div>
 			</div>

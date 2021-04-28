@@ -35,7 +35,7 @@ public class ReBoardDao {
 	}
 	
 	// 게시글 조회 전담 처리 함수
-	public ArrayList<BoardVO> dasd() {
+	public ArrayList<BoardVO> getReBoardList() {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		con = db.getCon();
 		String sql = rSQL.getSQL(rSQL.SEL_ALL_LIST);
@@ -46,6 +46,17 @@ public class ReBoardDao {
 				BoardVO rVO = new BoardVO();
 				rVO.setRno(rs.getInt("rno"));
 				rVO.setMno(rs.getInt("mno"));
+				rVO.setId(rs.getString("id"));
+				rVO.setAvatar(rs.getString("avatar"));
+				rVO.setTitle(rs.getString("title"));
+				rVO.setBody(rs.getString("body").replaceAll("\r\n", "<br>"));
+				rVO.setUpno(rs.getInt("upno"));
+				rVO.setStep(rs.getInt("step"));
+				rVO.setWdate(rs.getDate("wdate"));
+				rVO.setWtime(rs.getTime("wdate"));
+				rVO.setSdate();
+				
+				list.add(rVO);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
