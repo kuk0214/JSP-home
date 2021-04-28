@@ -11,6 +11,13 @@ public class GuestWriteProc implements CafeController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+		String view = "/cafe/gboard/gBoardList.cafe";
+		req.setAttribute("isRedirect", true);
+		String sid = (String) req.getSession().getAttribute("SID");
+		if(sid == null) {
+			view = "/cafe/member/login.cafe";
+		}
+		
 		int writer = Integer.parseInt(req.getParameter("mno"));
 		String body = req.getParameter("body");
 		
@@ -20,13 +27,12 @@ public class GuestWriteProc implements CafeController {
 		
 		GuestBoardDao gDao = new GuestBoardDao();
 		int cnt = gDao.addGBRD(gVO);
-		String view = "/cafe/gboard/gBoardList.cafe";
-		if(cnt == 1) {
-			req.setAttribute("isRedirect", true);
-		} else {
+		if(cnt != 1) {
 			view = "redirectPage";
 			req.setAttribute("WMSG", "fail");
+			req.setAttribute("isRedirect", false);
 		}
+		
 		return view;
 	}
 }

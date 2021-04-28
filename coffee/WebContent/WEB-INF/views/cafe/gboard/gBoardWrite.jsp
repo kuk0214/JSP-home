@@ -17,9 +17,10 @@
 		});
 		
 		$('#wbtn').click(function() {
-			var sbody = $('#body').val();
-			if(!sbody) {
-				alert('내용을 입력해주세요!');
+			var mno = $(document.frm.mno).val();
+			var body = $('#body').val();
+			if(!(mno && body)) {
+				alert('# 내용을 입력해주세요! #');
 				return;
 			}
 			document.frm.submit();

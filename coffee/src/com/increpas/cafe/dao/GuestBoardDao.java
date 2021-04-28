@@ -76,7 +76,7 @@ public class GuestBoardDao {
 				gVO.setMno(rs.getInt("mno"));
 				gVO.setId(rs.getString("id"));
 				gVO.setAvatar(rs.getString("avatar"));
-				gVO.setBody(rs.getString("body"));
+				gVO.setBody(rs.getString("body").replaceAll("\r\n", "<br>"));
 				gVO.setSdate(rs.getDate("wdate"));
 				// VO가 완성되면 list에 담고
 				list.add(gVO);
