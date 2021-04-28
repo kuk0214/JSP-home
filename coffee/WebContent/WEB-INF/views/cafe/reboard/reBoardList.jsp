@@ -44,7 +44,7 @@
 				url = '/cafe/main.cafe';
 				break;
 			case 'wbtn': 
-				url = '/cafe/gboard/gBoardWrite.cafe';
+				url = '/cafe/reboard/reBoardWrite.cafe'; // 원글 쓰기 버튼 이벤트 처리
 				break;
 			case 'outbtn': 
 				url = '/cafe/member/logout.cafe';
@@ -68,9 +68,7 @@
 		<nav class="w3-bar w3-pale-yellow">
 			<div class="w3-col w150 w3-left w3-button w3-amber" id="hbtn">home</div>
 <c:if test="${not empty SID}">
-	<c:if test="${CNT == 0}">
 			<div class="w3-col w150 w3-left w3-button w3-light-green w3-right" id="wbtn">글작성</div>
-	</c:if>
 			<div class="w3-col w150 w3-left w3-button w3-lime w3-right" id="outbtn">logout</div>
 </c:if>
 <c:if test="${empty SID}">
@@ -81,20 +79,27 @@
 		</header>
 		
 <c:forEach var="data" items="${LIST}">
-		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
-			<div class="w3-col box120 pdAll10 w3-border-right">
-				<img src="/cafe/img/avatar/${data.avatar}" class="inblock avtBox100 w3-border w3-border-grey">
-			</div>
-			<div class="w3-rest w3-padding">
-				<div class="w3-col w3-border-bottom">
+		<div class="w3-col" style="padding-left: ${data.step * 70}px;">
+			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
+				<div class="w3-col box120 pdAll10 w3-border-right">
+					<img src="/cafe/img/avatar/${data.avatar}" class="inblock avtBox100 w3-border w3-border-grey">
 					<span class="w3-text-left mgb10 ft10"><b>${data.id}</b></span>
-					<span class="w3-right mgb10 ft10">${data.sdate}</span>
 				</div>
-				<div class="w3-col w3-margin-top">
-					<span class="w3-col w3-padding ft12">${data.body}</span>
-				</div>
-				<div class="w3-col w3-margin-top">
-					<span class="w3-button w3-blue w3-tiny">댓글달기</span>
+				<div class="w3-rest w3-padding">
+					<div class="w3-col w3-border-bottom w3-border-grey">
+						<div class="w3-col w3-border-bottom">
+							<span class="w3-col mgt10 ft10">${data.title}</span>
+							<span class="w3-right mgb10 ft10">${data.sdate}</span>
+						</div>
+						<div class="w3-col w3-margin-top">
+							<span class="w3-col w3-padding ft12">${data.body}</span>
+						</div>
+					</div>
+					<div class="w3-col w3-margin-top">
+						<span class="w3-button w3-blue w3-tiny w3-left rebtn" id="r${data.rno}">댓글달기</span>
+						<span class="w3-button w3-green w3-tiny w3-right mgl10 rebtn" id="e${data.rno}" }>수정하기</span>
+						<span class="w3-button w3-red w3-tiny w3-right rebtn" id="d${data.rno}">삭제하기</span>
+					</div>
 				</div>
 			</div>
 		</div>

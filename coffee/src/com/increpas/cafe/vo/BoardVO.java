@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.text.*;
 
 public class BoardVO {
-	private int gno, mno, ano;
+	private int gno, rno, bno, mno, ano, cnt, step;
 	private String id, name, title, body, sdate, avatar;
 	private Date wdate;
 	private Time wtime;
@@ -14,6 +14,18 @@ public class BoardVO {
 	}
 	public void setGno(int gno) {
 		this.gno = gno;
+	}
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	public int getMno() {
 		return mno;
@@ -26,6 +38,18 @@ public class BoardVO {
 	}
 	public void setAno(int ano) {
 		this.ano = ano;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
 	}
 	public String getId() {
 		return id;
@@ -86,9 +110,9 @@ public class BoardVO {
 	}
 	@Override
 	public String toString() {
-		return "BoardVO gno=" + gno + ", mno=" + mno + ", ano=" + ano + ", id=" + id + ", name=" + name + ", title="
-				+ title + ", body=" + body + ", sdate=" + sdate + ", avatar=" + avatar + ", wdate=" + wdate + ", wtime="
-				+ wtime;
+		return "BoardVO gno=" + gno + ", rno=" + rno + ", bno=" + bno + ", mno=" + mno + ", ano=" + ano + ", cnt="
+				+ cnt + ", step=" + step + ", id=" + id + ", name=" + name + ", title=" + title + ", body=" + body
+				+ ", sdate=" + sdate + ", avatar=" + avatar + ", wdate=" + wdate + ", wtime=" + wtime;
 	}
 	
 }

@@ -116,4 +116,13 @@
 	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
 	뷰			: /WEB=INF/views/cafe/gboard/gBoardList.jsp
-							
+
+==================================================================================================================				
+
+# 댓글게시판 요청 설계	
+
+14. 댓글 게시판 리스트 보기 요청	
+	요청내용	: http://localhost/cafe/reboard/reBoardList.cafe
+	파라미터	: 무
+	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
+	뷰			: /WEB=INF/views/cafe/reboard/reBoardList.jsp		

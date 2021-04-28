@@ -53,7 +53,7 @@ commit;
 -- 계층 조회 질의명령
 SELECT
     rno, title, body, wmno, upno, wdate,
-    level --1 as step
+    level -1 as step
 FROM
     reboard
 WHERE
