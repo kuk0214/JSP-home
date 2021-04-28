@@ -68,4 +68,23 @@ public class ReBoardDao {
 		
 		return list;
 	}
+	
+	// 게시글 등록 데이터 베이스 전담 처리 함수
+	public int addReBRD(BoardVO rVO) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.ADD_REBRD);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, rVO.getTitle());
+			pstmt.setString(2, rVO.getBody());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 }
