@@ -30,14 +30,14 @@ INSERT INTO
     reboard(rno, title, body, wmno, upno)
 VALUES(
     (SELECT NVL(MAX(rno) + 1, 100001) FROM reboard),
-    '축하!', '서비스 개설을 축하합니다!', 1008, 100001
+    'test', 'test', 1008, 100007
 );
 
 INSERT INTO
     reboard(rno, title, body, wmno, upno)
 VALUES(
     (SELECT NVL(MAX(rno) + 1, 100001) FROM reboard),
-    '저도 축하!', '서비스 개설을 진심으로 축하합니다!', 1012, 100001
+    '저도 축하!', '서비스 개설을 진심으로 축하합니다!', 1009, 100001
 );
 
 -- 댓글의 댓글 달기

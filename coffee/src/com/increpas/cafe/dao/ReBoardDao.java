@@ -78,7 +78,48 @@ public class ReBoardDao {
 		try {
 			pstmt.setString(1, rVO.getTitle());
 			pstmt.setString(2, rVO.getBody());
-			
+			pstmt.setInt(3, rVO.getMno());
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	
+	// 댓글 등록 데이터 베이스 전담 처리 함수
+	public int addReply(BoardVO rVO) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.ADD_REPLY);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, rVO.getTitle());
+			pstmt.setString(2, rVO.getBody());
+			pstmt.setInt(3, rVO.getMno());
+			pstmt.setInt(4, rVO.getUpno());
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return cnt;
+	}
+	
+	// 글 삭제 데이터 베이스 전담 처리 함수
+	public int delRBRD(int rno) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.DEL_REBRD);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, rno);
+			cnt = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -4,6 +4,8 @@ public class ReBoardSQL {
 	public final int SEL_ALL_LIST		=	1001;
 	
 	public final int ADD_REBRD			=	3001;
+	public final int ADD_REPLY			=	3002;
+	public final int DEL_REBRD			=	3003;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -32,6 +34,31 @@ public class ReBoardSQL {
 			buff.append("	(SELECT NVL(MAX(rno) + 1, 100001) FROM reboard), ");
 			buff.append("	?, ?, ? ");
 			buff.append(")");
+			break;
+		case ADD_REPLY:
+			buff.append("INSERT INTO ");
+			buff.append("	reboard(rno, title, body, wmno, upno) ");
+			buff.append("VALUES( ");
+			buff.append("	(SELECT NVL(MAX(rno) + 1, 100001) FROM reboard), ");
+			buff.append("	?, ?, ?, ? ");
+			buff.append(")");
+			break;
+		case DEL_REBRD:
+			buff.append("UPDATE ");
+			buff.append("	reboard ");
+			buff.append("SET ");
+			buff.append("	isshow = 'N' ");
+			buff.append("WHERE ");
+			buff.append("	rno IN ( ");
+			buff.append("				SELECT ");
+			buff.append("					rno ");
+			buff.append("				FROM ");
+			buff.append("					 reboard ");
+			buff.append("				START WITH ");
+			buff.append("					rno = ? ");
+			buff.append("				CONNECT BY ");
+			buff.append("					PRIOR rno = upno ");
+			buff.append("			)");
 			break;
 		}
 		

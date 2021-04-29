@@ -20,7 +20,7 @@
 			document.frm.reset();
 		});
 		
-		$('#wbtn').click(function() {
+		$('#rebtn').click(function() {
 			var mno = $(document.frm.mno).val();
 			var title = $('#title').val().trim();
 			var body = $('#body').val().trim();
@@ -35,16 +35,21 @@
 </head>
 <body>
 	<div class="w3-content mxw750 w3-maring-top">
-		<h1 class="w3-green w3-center w3-padding w3-margin-bottom">게시글 작성</h1>
+		<h1 class="w3-green w3-center w3-padding w3-margin-bottom">댓글 작성</h1>
 		
-		<form method="POST" action="/cafe/reboard/reBoardWriteProc.cafe" name="frm" id="frm"
+		<form method="POST" action="/cafe/reboard/reBoardReplyProc.cafe" name="frm" id="frm"
 				class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
 			<input type="hidden" name="mno" value="${DATA.mno}">
+			<input type="hidden" name="upno" value="${UPNO}">
 			<div class="w3-col w3-center box120 pdAll10">
 				<img src="/cafe/img/avatar/${DATA.avatar}" class="inblock w3-circle avtBox100 border3px w3-card-2">
 				<span class="w3-col ft10"><b>${SID}</b></span>
 			</div>
 			<div class="w3-rest w3-padding">
+				<div class="w3-col">
+					<span class="w3-col "><label>원글제목</label></span>
+					<input class="w3-input w3-text-blue w3-margin-bottom noresize" value="${UPTITLE}" disabled>
+				</div>
 				<div class="w3-col w3-border-bottom">
 					<input class="w3-input noresize" id="title" name="title" placeholder="제목을 입력하세요!">
 				</div>
@@ -56,7 +61,7 @@
 		<div class="w3-col w3-margin-top">
 			<div class="w3-third w3-button w3-small w3-left w3-amber" id="hbtn">Home</div>
 			<div class="w3-third w3-button w3-small w3-left w3-yellow " id="rbtn">reset</div>
-			<div class="w3-third w3-button w3-small w3-left w3-lime" id="wbtn">글작성</div>
+			<div class="w3-third w3-button w3-small w3-left w3-lime" id="rebtn">댓글작성</div>
 		</div>
 	</div>
 </body>

@@ -11,7 +11,7 @@
 	요청내용	:	http://localhost/cafe/main.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.CafeMain
-	뷰			:	/WEB=INF/views/cafe/main.jsp
+	뷰			:	/WEB-INF/views/cafe/main.jsp
 	
 ===================================================================================================================
 
@@ -21,13 +21,13 @@
 	요청내용	:	http://localhost/cafe/member/login.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.member.LoginFrom
-	뷰			:	/WEB=INF/views/cafe/member/login.jsp
+	뷰			:	/WEB-INF/views/cafe/member/login.jsp
 	
 2. 회원가입 폼보기 요청
 	요청내용	:	http://localhost/cafe/member/join.cafe
 	파라미터	:	무
 	컨트롤러	:	com.increpas.cafe.controller.member.JoinFrom
-	뷰			:	/WEB=INF/views/cafe/member/join.jsp
+	뷰			:	/WEB-INF/views/cafe/member/join.jsp
 
 3. 로그아웃 
 	요청내용	:	http://localhost/cafe/member/logout.cafe
@@ -61,25 +61,25 @@
 	요청내용	: http://localhost/cafe/member/myInfo.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfo
-	뷰			: /WEB=INF/views/cafe/member/memberInfo.jsp
+	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
 	
 7. 회원 목록 보기 요청
 	요청내용	: http://localhost/cafe/member/memberList.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MemberList
-	뷰			: /WEB=INF/views/cafe/member/memberList.jsp
+	뷰			: /WEB-INF/views/cafe/member/memberList.jsp
 	
 8. 회원 정보 보기 요청
 	요청내용	: http://localhost/cafe/member/memberInfo.cafe
 	파라미터	: mno
 	컨트롤러	: com.increpas.cafe.controller.member.MemberInfo
-	뷰			: /WEB=INF/views/cafe/member/memberInfo.jsp
+	뷰			: /WEB-INF/views/cafe/member/memberInfo.jsp
 
 9. 내 정보 수정 보기 요청
 	요청내용	: http://localhost/cafe/member/myInfoEdit.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.member.MyInfoEdit
-	뷰			: /WEB=INF/views/cafe/member/myInfoEdit.jsp
+	뷰			: /WEB-INF/views/cafe/member/myInfoEdit.jsp
 
 10. 내 정보 수정 처리 요청
 	요청내용	: http://localhost/cafe/member/myInfoEditProc.cafe
@@ -99,7 +99,7 @@
 	요청내용	: http://localhost/cafe/gboard/gBoardWrite.cafe
 	파라미터	: 무(SID)
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestWrite
-	뷰			: /WEB=INF/views/cafe/gboard/gBoardWrite.jsp
+	뷰			: /WEB-INF/views/cafe/gboard/gBoardWrite.jsp
 	
 2. 방명록 작성 처리 요청
 	요청내용	: http://localhost/cafe/gboard/gBoardWriteProc.cafe
@@ -115,7 +115,7 @@
 	요청내용	: http://localhost/cafe/gboard/gBoardList.cafe
 	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.gboard.GuestList
-	뷰			: /WEB=INF/views/cafe/gboard/gBoardList.jsp
+	뷰			: /WEB-INF/views/cafe/gboard/gBoardList.jsp
 
 ==================================================================================================================				
 
@@ -125,15 +125,15 @@
 	요청내용	: http://localhost/cafe/reboard/reBoardList.cafe
 	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardList
-	뷰			: /WEB=INF/views/cafe/reboard/reBoardList.jsp
+	뷰			: /WEB-INF/views/cafe/reboard/reBoardList.jsp
 			
 2. 게시글 쓰기 폼보기 요청	
 	요청내용	: http://localhost/cafe/reboard/reBoardWrite.cafe
 	파라미터	: 무
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardWrite
-	뷰			: /WEB=INF/views/cafe/reboard/reBoardWrite.jsp
+	뷰			: /WEB-INF/views/cafe/reboard/reBoardWrite.jsp
 			
-3. 게시글 등록 처리 요청	
+3. 게시글 쓰기 처리 요청	
 	요청내용	: http://localhost/cafe/reboard/reBoardWriteProc.cafe
 	파라미터	: title, body
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardWriteProc
@@ -147,9 +147,9 @@
 	요청내용	: http://localhost/cafe/reboard/reBoardReply.cafe
 	파라미터	: rno
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardReply
-	뷰			: /WEB=INF/views/cafe/reboard/reBoardWrite.jsp
+	뷰			: /WEB-INF/views/cafe/reboard/reBoardReply.jsp
 			
-5. 댓글 등록 처리 요청	
+5. 댓글 쓰기 처리 요청	
 	요청내용	: http://localhost/cafe/reboard/reBoardReplyProc.cafe
 	파라미터	: upno, title, body
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardReplyProc
@@ -158,3 +158,15 @@
 								http://localhost/cafe/reboard/reBoardList.cafe
 						실패 ]
 								http://localhost/cafe/reboard/reBoardReply.cafe
+								
+6. 댓글 삭제 처리 요청
+	요청내용	: http://localhost/cafe/reboard/reBoardDel.cafe
+	파라미터	: rno
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardDel
+	뷰			: redirect ]
+						성공 & 실패 ]
+								http://localhost/cafe/reboard/reBoardList.cafe
+	
+7. 댓글 수정 폼보기 요청
+
+8. 댓글 수정 처리 요청
