@@ -128,4 +128,32 @@ public class ReBoardDao {
 		}
 		return cnt;
 	}
+	
+	// 게시글 정보조회 전담 처리 함수
+	public void getBoardRno(BoardVO rVO) {
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.SEL_RNO_INFO);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, rVO.getId());
+			pstmt.setInt(2, rVO.getRno());
+			rs = pstmt.executeQuery();
+			rs.next();
+			rVO.setRno(rs.getInt("rno"));
+			rVO.setUpno(rs.getInt("upno"));
+			rVO.setMno(rs.getInt("mno"));
+			rVO.setAvatar(rs.getString("avatar"));
+			rVO.setTitle(rs.getString("title"));
+			rVO.setUptitle(rs.getString("uptitle"));
+			rVO.setBody(rs.getString("body"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return;
+	}
 }

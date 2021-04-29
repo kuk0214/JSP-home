@@ -6,7 +6,7 @@ import java.text.*;
 
 public class BoardVO {
 	private int gno, rno, bno, mno, ano, cnt, step, upno;
-	private String id, name, title, body, sdate, avatar;
+	private String id, name, title, uptitle, body, sdate, avatar;
 	private Date wdate;
 	private Time wtime;
 	public int getGno() {
@@ -74,6 +74,12 @@ public class BoardVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getUptitle() {
+		return uptitle;
+	}
+	public void setUptitle(String uptitle) {
+		this.uptitle = uptitle;
 	}
 	public String getBody() {
 		return body;

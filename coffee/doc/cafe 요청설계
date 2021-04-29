@@ -159,7 +159,7 @@
 						실패 ]
 								http://localhost/cafe/reboard/reBoardReply.cafe
 								
-6. 댓글 삭제 처리 요청
+6. 글 삭제 처리 요청
 	요청내용	: http://localhost/cafe/reboard/reBoardDel.cafe
 	파라미터	: rno
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardDel
@@ -167,6 +167,18 @@
 						성공 & 실패 ]
 								http://localhost/cafe/reboard/reBoardList.cafe
 	
-7. 댓글 수정 폼보기 요청
-
+7. 글 수정 폼보기 요청
+	요청내용	: http://localhost/cafe/reboard/reBoardEdit.cafe
+	파라미터	: rno
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardEdit
+	뷰			: /WEB-INF/views/cafe/reboard/reBoardEdit.jsp
+	
 8. 댓글 수정 처리 요청
+	요청내용	: http://localhost/cafe/reboard/reBoardEditProc.cafe
+	파라미터	: rno, title || body
+	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardEditProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/reboard/reBoardList.cafe
+						실패 ]
+								http://localhost/cafe/reboard/reBoardEdit.cafe
