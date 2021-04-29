@@ -69,7 +69,7 @@ public class ReBoardDao {
 		return list;
 	}
 	
-	// 게시글 등록 데이터 베이스 전담 처리 함수
+	// 게시글 등록 전담 처리 함수
 	public int addReBRD(BoardVO rVO) {
 		int cnt = 0;
 		con = db.getCon();
@@ -89,7 +89,7 @@ public class ReBoardDao {
 		return cnt;
 	}
 	
-	// 댓글 등록 데이터 베이스 전담 처리 함수
+	// 댓글 등록 전담 처리 함수
 	public int addReply(BoardVO rVO) {
 		int cnt = 0;
 		con = db.getCon();
@@ -111,7 +111,7 @@ public class ReBoardDao {
 		return cnt;
 	}
 	
-	// 글 삭제 데이터 베이스 전담 처리 함수
+	// 게시글 삭제 전담 처리 함수
 	public int delRBRD(int rno) {
 		int cnt = 0;
 		con = db.getCon();

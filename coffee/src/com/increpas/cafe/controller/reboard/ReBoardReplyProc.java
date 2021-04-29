@@ -24,8 +24,7 @@ public class ReBoardReplyProc implements CafeController {
 		rVO.setUpno(Integer.parseInt(req.getParameter("upno")));
 		
 		ReBoardDao rDao = new ReBoardDao();
-		int cnt = 0;
-		cnt = rDao.addReply(rVO);
+		int cnt = rDao.addReply(rVO);
 		if(cnt != 1) {
 			
 		}

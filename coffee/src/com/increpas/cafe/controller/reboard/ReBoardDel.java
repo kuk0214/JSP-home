@@ -10,14 +10,18 @@ public class ReBoardDel implements CafeController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		String view = "reBoardList.cafe";
+		String view = "/cafe/reboard/reBoardList.cafe";
+		req.setAttribute("isRedirect", true);
+		
+		String sid = (String) req.getSession().getAttribute("SID");
+		if(sid == null) {
+			return "/cafe/member/login.cafe";
+		}
+		
 		int rno = Integer.parseInt(req.getParameter("rno"));
 		ReBoardDao rDao = new ReBoardDao();
-		int cnt = rDao.delRBRD(rno);
-		if(cnt != 1) {
-			req.setAttribute("isRedirect", true);
-			return "/cafe/reboard/reBoardList.cafe";
-		}
+		rDao.delRBRD(rno);
+		
 		return view;
 	}
 
