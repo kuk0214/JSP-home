@@ -156,4 +156,12 @@ public class ReBoardDao {
 		
 		return;
 	}
+	
+	// 게시글 수정 전담 처리 함수
+	public int editReBRD(BoardVO rVO) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.EDIT_REBRD);
+		return cnt;
+	}
 }

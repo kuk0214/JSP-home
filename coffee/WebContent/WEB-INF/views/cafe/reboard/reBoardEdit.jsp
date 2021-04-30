@@ -21,7 +21,39 @@
 		});
 		
 		$('#ebtn').click(function() {
+			var title = $('#title').val();
+			var body = $('#body').val();
+			if(!(title && body) || title == '${DATA.title}' && body == '${DATA.body}') {
+				alert('*** 수정 내용을 확인하세요! ***');
+				return;
+			}
 			
+			if(title == '${DATA.title}') {
+				// 이 경우는 제목을 수정안한 경우이므로
+				// 이 태그를 전송하면 안된다.
+				$('#title').prop('disabled', true);
+			} else {
+				$('#title').prop('disabled', false);
+				// 글 제목의 정규표현식 검사를 한다.
+				
+				var exp = /^.{1,50}$/;
+				var result = exp.test(title);
+				if(!result) {
+					// 정규표현식에 통과하지 못한 경우
+					// 따라서 표현식에 맞도록 유도한다.
+					alert('# 제목은 50글자 까지만 가능합니다! #');
+					return;
+				}
+			}
+			
+			if(body == '${DATA.body}') {
+				$('#body').prop('disabled', true);
+			} else {
+				$('#body').prop('disabled', false);				
+			}
+			
+			// 이행을 실행하는 경우는 제목과 본문중 적어도 하나는 수정되었고
+			// 제목의 글자수도 50자 이내로 작성한 경우이므로 처리페이지를 부른다.
 			$('#frm').submit();
 		});
 	});
@@ -41,7 +73,7 @@
 			</div>
 			<div class="w3-rest w3-padding">
 		<c:if test="${DATA.upno ne 0}">
-			<input type="hidden" name="upno" id="upno" value="${DATA.upno}">
+			<input type="hidden" name="upno" id="upno" value="${DATA.upno}" disabled>
 				<div class="w3-col">
 					<span class="w3-col "><label>원글제목</label></span>
 					<input class="w3-input w3-text-blue w3-margin-bottom noresize" value="${DATA.uptitle}" disabled>

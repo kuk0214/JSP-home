@@ -173,7 +173,7 @@
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardEdit
 	뷰			: /WEB-INF/views/cafe/reboard/reBoardEdit.jsp
 	
-8. 댓글 수정 처리 요청
+8. 글 수정 처리 요청
 	요청내용	: http://localhost/cafe/reboard/reBoardEditProc.cafe
 	파라미터	: rno, title || body
 	컨트롤러	: com.increpas.cafe.controller.reboard.ReBoardEditProc

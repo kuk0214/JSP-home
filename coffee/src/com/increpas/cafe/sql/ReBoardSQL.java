@@ -4,6 +4,8 @@ public class ReBoardSQL {
 	public final int SEL_ALL_LIST		=	1001;
 	public final int SEL_RNO_INFO		=	1002;
 	
+	public final int EDIT_REBRD			=	2001;
+	
 	public final int ADD_REBRD			=	3001;
 	public final int ADD_REPLY			=	3002;
 	public final int DEL_REBRD			=	3003;
@@ -47,6 +49,14 @@ public class ReBoardSQL {
 			buff.append("			   ) ");
 			buff.append("	AND r.rno = ?" );
 			buff.append("   AND r.isshow = 'Y'");
+			break;
+		case EDIT_REBRD:
+			buff.append("UPDATE ");
+			buff.append("	reboard ");
+			buff.append("SET ");
+			buff.append("	### ");
+			buff.append("WHERE ");
+			buff.append("	rno = ?");
 			break;
 		case ADD_REBRD:
 			buff.append("INSERT INTO ");
