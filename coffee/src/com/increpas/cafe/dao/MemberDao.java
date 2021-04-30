@@ -302,35 +302,30 @@ public class MemberDao {
 		}
 		
 		// 내 정보 수정 데이터 베이스 작업 전담 처리함수
-		public int editMyInfo(HashMap<String, Object> map) {
+		public int editMyInfo(Map<String, String[]> map, String id) {
 			int cnt = 0;
-			
 			
 			con = db.getCon();
 			String sql = mSQL.getSQL(mSQL.EDIT_MYINFO);
-			Set<String> set = (Set<String>) map.keySet();
+			Set<String> set = map.keySet();
 			ArrayList<String> list = new ArrayList<String>(set);
-			Collections.sort(list);
-			sql = sql.replaceAll("###", getParam(list));
+			String str = list.toString().replaceAll("\\[|\\]", "").replaceAll(",", " = ? , ") + " = ? ";
+			
+			sql = sql.replaceAll("###", str);
 			
 			pstmt = db.getPSTMT(con, sql);
 			try {
-				for(int i = 0 ; i < list.size(); i++ ) {
-					String key = list.get(i);
-					if(key.substring(1).equals("avt")) {
-						/*
-							맵에는 키값들이 정렬을 위해서
-							만약 비밀번호와 아바타를 변경한 경우
-								"1pw", pw
-								"2avt", avt
-								
-							만약 아바타 번호를 꺼내는 경우에는 정수로 변환해줘야 할 것이고
-							나머지 경우는 문자열로 변환해주면 된다.
-						 */
-						pstmt.setInt(i+1, (int) map.get(key));
-					} else {
-						pstmt.setString(i+1, (String) map.get(key));
+				if(list.size() == 1 || list.size() == 2) {
+					for(int i = 0 ; i < list.size(); i++ ) {
+						pstmt.setString((i+1), map.get(list.get(i))[0]);
 					}
+					pstmt.setString(list.size() + 1, id);
+				} else {
+					for(int i = 0 ; i < list.size() - 1 ; i++ ) {
+						pstmt.setString((i+1), map.get(list.get(i))[0]);
+					}
+					pstmt.setInt(list.size(), Integer.parseInt(map.get(list.get(2))[0]));	
+					pstmt.setString(list.size() + 1, id);
 				}
 				
 				cnt = pstmt.executeUpdate();

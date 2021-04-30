@@ -38,7 +38,7 @@
 		}); */
 		
 		// 여러태그를 동시에 이벤트를 처리하는 방법
-		$('.w3-button').click(function() {
+		$('.w150.w3-button').click(function() {
 			// 이렇게 선택하면 클래스에 w3-button 이 추가되어있는 태그는 모두 선택하고
 			// 선택된 태그들에 클릭 이벤트를 등록하게 된다.
 			var tid = $(this).attr('id');
@@ -154,7 +154,30 @@
 			</div>
 		</div>
 </c:forEach>
-
+		<div class="w3-center w3-margin-bottom">
+			<div class="w3-bar w3-border w3-round w3-margin-top">
+		<c:if test="${PAGE.startPage == 1}">
+			  <span class="w3-bar-item w3-grey">pre</span>
+		</c:if>
+		<c:if test="${PAGE.startPage != 1}">
+			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">pre</span>
+		</c:if>
+	<c:forEach var="page" begin="${PAGE.startCont}" end="${PAGE.endCont}">
+		<c:if test="${PAGE.nowPage == page}">
+			  <span class="w3-bar-item w3-button w3-hover-aqua w3-blue pbtn">${page}</span>
+	  	</c:if>
+		<c:if test="${PAGE.nowPage != page}">
+			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">${page}</span>
+	  	</c:if>
+  	</c:forEach>
+  		<c:if test="${PAGE.endPage == PAGE.total}">
+			  <span class="w3-bar-item w3-grey">next</span>
+		</c:if>
+  		<c:if test="${PAGE.endPage != PAGE.total}">
+			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">next</span>
+		</c:if>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

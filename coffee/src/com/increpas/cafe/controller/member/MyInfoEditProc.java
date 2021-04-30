@@ -25,35 +25,9 @@ public class MyInfoEditProc implements CafeController {
 			return view;
 		}
 		
-		String pw = req.getParameter("pw");
-		String mail = req.getParameter("mail");
-		String tel = req.getParameter("tel");
-		String avt = req.getParameter("avt");
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		// map 에 데이터 담고
-		int no = 1;
-		
-		if(pw != null) {
-			map.put(no++ + "pw", pw);
-		}
-		
-		if(mail != null) {
-			map.put(no++ + "mail", mail);
-		}
-		
-		if(tel != null) {
-			map.put(no++ + "tel", tel);
-		}
-		
-		if(avt != null) {
-			map.put(no++ + "avt", Integer.parseInt(avt));
-		}
-		map.put(no++ + "sid", sid);
-		
-		
+		Map<String, String[]> map = req.getParameterMap();
 		MemberDao mDao = new MemberDao();
-		int cnt = mDao.editMyInfo(map);
+		int cnt = mDao.editMyInfo(map, sid);
 		
 		if(cnt == 1) {
 			// 정보수정에 성공한 경우

@@ -3,6 +3,8 @@ package com.increpas.cafe.sql;
 public class ReBoardSQL {
 	public final int SEL_ALL_LIST		=	1001;
 	public final int SEL_RNO_INFO		=	1002;
+	public final int SEL_LIST_RNUM		=	1003;
+	public final int SEL_TOTAL_CNT		=	1004;
 	
 	public final int EDIT_REBRD			=	2001;
 	
@@ -49,6 +51,42 @@ public class ReBoardSQL {
 			buff.append("			   ) ");
 			buff.append("	AND r.rno = ?" );
 			buff.append("   AND r.isshow = 'Y'");
+			break;
+		case SEL_LIST_RNUM:
+			buff.append("SELECT ");
+			buff.append("    rnum, rno, mno, id, avatar, title, body, upno, wdate, step ");
+			buff.append("FROM ");
+			buff.append("    ( ");
+			buff.append("        SELECT ");
+			buff.append("            ROWNUM rnum, rno, mno, id, avatar, title, body, upno, wdate, step ");
+			buff.append("        FROM ");
+			buff.append("            ( ");
+			buff.append("                SELECT ");
+			buff.append("                    rno, mno, id, savename avatar, title, body, upno, wdate, level -1 as step ");
+			buff.append("                FROM ");   
+			buff.append("                    reboard r, member, avatar ");
+			buff.append("                WHERE ");
+			buff.append("                    wmno = mno ");
+			buff.append("                    AND avt = ano ");
+			buff.append("                    AND r.isShow = 'Y' ");
+			buff.append("            START WITH ");
+			buff.append("                upno IS NULL ");
+			buff.append("            CONNECT BY ");
+			buff.append("                PRIOR rno = upno ");
+			buff.append("            ORDER SIBLINGS BY ");
+			buff.append("                wdate DESC ");
+			buff.append("        ) ");
+			buff.append(") ");    
+			buff.append("		WHERE ");
+			buff.append("		    ROWNUM BETWEEN ? AND ?");
+			break;
+		case SEL_TOTAL_CNT:
+			buff.append("SELECT ");
+			buff.append("	COUNT(*) cnt ");
+			buff.append("FROM ");
+			buff.append("    reboard ");
+			buff.append("WHERE ");
+			buff.append("	isshow = 'Y'");
 			break;
 		case EDIT_REBRD:
 			buff.append("UPDATE ");

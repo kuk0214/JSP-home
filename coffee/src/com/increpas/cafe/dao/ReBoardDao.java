@@ -186,5 +186,24 @@ public class ReBoardDao {
 		return cnt;
 	}
 	
+	// 총 게시물 수 조회 전담 처리함수
+	public int getTotalCount() {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.SEL_TOTAL_CNT);
+		stmt = db.getSTMT(con);
+		try {
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 
 }
