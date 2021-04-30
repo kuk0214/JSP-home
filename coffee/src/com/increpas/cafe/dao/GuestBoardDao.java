@@ -8,6 +8,7 @@ import java.util.*;
 
 import com.increpas.cafe.db.*;
 import com.increpas.cafe.sql.*;
+import com.increpas.cafe.util.PageUtil;
 import com.increpas.cafe.vo.*;
 
 
@@ -92,6 +93,43 @@ public class GuestBoardDao {
 		return list;
 	}
 	
+	public ArrayList<BoardVO> getGBoardList(PageUtil page) {
+		// 반환값 변수 만들고
+		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
+		// 커넥션 꺼내오고
+		con = db.getCon();
+		// 질의명령 가져오고
+		String sql = gSQL.getSQL(gSQL.SEL_LIST_RNUM);
+		//  스테이트먼트 준비하고
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, page.getStartCont());
+			pstmt.setInt(2, page.getEndCont());
+			// 질의명령 보내고 결과 받고
+			rs = pstmt.executeQuery();
+			// 결과에서 데이터 반복해서 꺼내서 VO담고
+			while(rs.next()) {
+				BoardVO gVO = new BoardVO();
+				gVO.setGno(rs.getInt("gno"));
+				gVO.setMno(rs.getInt("mno"));
+				gVO.setId(rs.getString("id"));
+				gVO.setAvatar(rs.getString("avatar"));
+				gVO.setBody(rs.getString("body").replaceAll("\r\n", "<br>"));
+				gVO.setSdate(rs.getDate("wdate"));
+				// VO가 완성되면 list에 담고
+				list.add(gVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		// 반환값 변환하고
+		return list;
+	}
+	
 	// 작성글 카운트 조회 전담 처리 함수
 	public int getWriteCount(String id) {
 		int cnt = 0;
@@ -131,4 +169,24 @@ public class GuestBoardDao {
 		}
 		return cnt;
 	}
+	
+	// 총 방명록 수 조회 전담 처리함수
+		public int getTotalCount() {
+			int cnt = 0;
+			con = db.getCon();
+			String sql = gSQL.getSQL(gSQL.SEL_TOTAL_CNT);
+			stmt = db.getSTMT(con);
+			try {
+				rs = stmt.executeQuery(sql);
+				rs.next();
+				cnt = rs.getInt("cnt");
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(stmt);
+				db.close(con);
+			}
+			return cnt;
+		}
 }

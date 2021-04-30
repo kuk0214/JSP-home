@@ -69,16 +69,16 @@ public class ReBoardSQL {
 			buff.append("                    wmno = mno ");
 			buff.append("                    AND avt = ano ");
 			buff.append("                    AND r.isShow = 'Y' ");
-			buff.append("            START WITH ");
-			buff.append("                upno IS NULL ");
-			buff.append("            CONNECT BY ");
-			buff.append("                PRIOR rno = upno ");
-			buff.append("            ORDER SIBLINGS BY ");
-			buff.append("                wdate DESC ");
+			buff.append("            	START WITH ");
+			buff.append("                	upno IS NULL ");
+			buff.append("            	CONNECT BY ");
+			buff.append("               	 PRIOR rno = upno ");
+			buff.append("            	ORDER SIBLINGS BY ");
+			buff.append("                	wdate DESC ");
 			buff.append("        ) ");
 			buff.append(") ");    
 			buff.append("		WHERE ");
-			buff.append("		    ROWNUM BETWEEN ? AND ?");
+			buff.append("		    rnum BETWEEN ? AND ?");
 			break;
 		case SEL_TOTAL_CNT:
 			buff.append("SELECT ");

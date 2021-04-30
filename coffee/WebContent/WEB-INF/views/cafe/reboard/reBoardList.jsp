@@ -96,6 +96,23 @@
 				$('#frm').submit();				
 			}
 		})
+		
+		// 페이지 버튼 이벤트 처리
+		$('.pbtn').click(function() {
+			var spage = $(this).html();
+			switch (spage) {
+			case 'pre':
+				$('#nowPage').val('${PAGE.startPage - 1}');
+				break;
+			case 'next':
+				$('#nowPage').val('${PAGE.endPage + 1}');
+				break;
+			default:
+				$('#nowPage').val(spage);
+			}
+			$('#frm').attr('action', '/cafe/reboard/reBoardList.cafe');
+			$('#frm').submit();
+		});
 	});
 </script>
 </head>
@@ -106,6 +123,7 @@
 	</script>
 </c:if>
 	<form method="POST" action="/cafe/reboard/reBoardReply.cafe" id="frm" name="frm">
+		<input type="hidden" name="nowPage" id="nowPage">
 		<input type="hidden" name="rno" id="rno">
 		<input type="hidden" name="upno" id="upno">
 		<input type="hidden" name="title" id="title">
@@ -127,7 +145,7 @@
 		</header>
 		
 <c:forEach var="data" items="${LIST}">
-		<div class="w3-col" style="padding-left: ${data.step * 70}px">
+		<div class="w3-col" style="padding-left: ${(data.step <= 2) ? data.step * 70 : 140}px">
 			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding">
 				<div class="w3-col w120 w3-center pdAll10">
 					<img src="/cafe/img/avatar/${data.avatar}" class="inblock w3-circle avtBox100 border3px w3-card-2" id="a${data.rno}">
@@ -156,26 +174,26 @@
 </c:forEach>
 		<div class="w3-center w3-margin-bottom">
 			<div class="w3-bar w3-border w3-round w3-margin-top">
-		<c:if test="${PAGE.startPage == 1}">
+	<c:if test="${PAGE.startPage == 1}">
 			  <span class="w3-bar-item w3-grey">pre</span>
-		</c:if>
-		<c:if test="${PAGE.startPage != 1}">
+	</c:if>
+	<c:if test="${PAGE.startPage != 1}">
 			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">pre</span>
-		</c:if>
-	<c:forEach var="page" begin="${PAGE.startCont}" end="${PAGE.endCont}">
-		<c:if test="${PAGE.nowPage == page}">
+	</c:if>
+<c:forEach var="page" begin="${PAGE.startPage}" end="${PAGE.endPage}">
+	<c:if test="${PAGE.nowPage == page}">
 			  <span class="w3-bar-item w3-button w3-hover-aqua w3-blue pbtn">${page}</span>
-	  	</c:if>
+  	</c:if>
 		<c:if test="${PAGE.nowPage != page}">
 			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">${page}</span>
-	  	</c:if>
-  	</c:forEach>
-  		<c:if test="${PAGE.endPage == PAGE.total}">
+  	</c:if>
+</c:forEach>
+	<c:if test="${PAGE.endPage == PAGE.totalPage}">
 			  <span class="w3-bar-item w3-grey">next</span>
-		</c:if>
-  		<c:if test="${PAGE.endPage != PAGE.total}">
+	</c:if>
+	<c:if test="${PAGE.endPage != PAGE.totalPage}">
 			  <span class="w3-bar-item w3-button w3-hover-aqua pbtn">next</span>
-		</c:if>
+	</c:if>
 			</div>
 		</div>
 	</div>

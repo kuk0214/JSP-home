@@ -3,6 +3,8 @@ package com.increpas.cafe.sql;
 public class GuestBoardSQL {
 	public final int SEL_ALL_LIST	= 1001;
 	public final int SEL_MY_CNT		= 1002;
+	public final int SEL_LIST_RNUM	= 1003;
+	public final int SEL_TOTAL_CNT	= 1004;
 	
 	public final int ADD_GBRD		= 3001;
 	
@@ -28,6 +30,38 @@ public class GuestBoardSQL {
 			buff.append("	writer = ( ");
 			buff.append("		SELECT mno FROM member WHERE id = ? ");
 			buff.append("			 )");
+			break;
+		case SEL_LIST_RNUM:
+			buff.append("SELECT ");
+			buff.append("    rnum, gno, mno, id, avatar, body, wdate ");
+			buff.append("FROM ");
+			buff.append("    ( ");
+			buff.append("        SELECT ");
+			buff.append("            ROWNUM rnum, gno, mno, id, avatar, body, wdate ");
+			buff.append("        FROM ");
+			buff.append("            ( ");
+			buff.append("                SELECT ");
+			buff.append("                    gno, mno, id, savename avatar, body, wdate ");
+			buff.append("                FROM ");   
+			buff.append("                    guestboard g, member, avatar ");
+			buff.append("                WHERE ");
+			buff.append("                    writer = mno ");
+			buff.append("                    AND avt = ano ");
+			buff.append("                    AND g.isShow = 'Y' ");
+			buff.append("                ORDER BY ");
+			buff.append("                    wdate DESC ");
+			buff.append("            ) ");
+			buff.append("    ) ");    
+			buff.append("WHERE ");
+			buff.append("    rnum BETWEEN ? AND ?");
+			break;
+		case SEL_TOTAL_CNT:
+			buff.append("SELECT ");
+			buff.append("	COUNT(*) cnt ");
+			buff.append("FROM ");
+			buff.append("    guestboard ");
+			buff.append("WHERE ");
+			buff.append("	isshow = 'Y'");
 			break;
 		case ADD_GBRD:
 			buff.append("INSERT INTO ");

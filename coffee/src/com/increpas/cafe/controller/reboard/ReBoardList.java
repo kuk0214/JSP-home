@@ -31,7 +31,7 @@ public class ReBoardList implements CafeController {
 		// 페이지 처리에 필요한 객체를 만들어 준다.
 		PageUtil page = new PageUtil(nowPage, total);
 		
-		ArrayList<BoardVO> list = rDao.getReBoardList();
+		ArrayList<BoardVO> list = rDao.getReBoardList(page);
 		
 		req.setAttribute("LIST", list);
 		req.setAttribute("PAGE", page);

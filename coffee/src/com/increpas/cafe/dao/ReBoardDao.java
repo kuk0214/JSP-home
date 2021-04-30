@@ -9,6 +9,7 @@ import javax.sql.*;
 import com.increpas.cafe.db.*;
 import com.increpas.cafe.vo.*;
 import com.increpas.cafe.sql.*;
+import com.increpas.cafe.util.PageUtil;
 
 /**
  * 이 클래스는 댓글 게시판 데이터 베이스 작업 전담 처리 클래스
@@ -63,6 +64,42 @@ public class ReBoardDao {
 		} finally {
 			db.close(rs);
 			db.close(stmt);
+			db.close(con);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<BoardVO> getReBoardList(PageUtil page) {
+		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
+		con = db.getCon();
+		String sql = rSQL.getSQL(rSQL.SEL_LIST_RNUM);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, page.getStartCont());
+			pstmt.setInt(2, page.getEndCont());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardVO rVO = new BoardVO();
+				rVO.setRno(rs.getInt("rno"));
+				rVO.setMno(rs.getInt("mno"));
+				rVO.setId(rs.getString("id"));
+				rVO.setAvatar(rs.getString("avatar"));
+				rVO.setTitle(rs.getString("title"));
+				rVO.setBody(rs.getString("body").replaceAll("\r\n", "<br>"));
+				rVO.setUpno(rs.getInt("upno"));
+				rVO.setStep(rs.getInt("step"));
+				rVO.setWdate(rs.getDate("wdate"));
+				rVO.setWtime(rs.getTime("wdate"));
+				rVO.setSdate();
+				
+				list.add(rVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
 			db.close(con);
 		}
 		
