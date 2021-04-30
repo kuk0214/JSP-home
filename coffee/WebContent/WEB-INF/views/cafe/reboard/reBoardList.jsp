@@ -100,6 +100,11 @@
 </script>
 </head>
 <body>
+<c:if test="${not empty param.msg}">
+	<script type="text/javascript">
+		alert('수정 작업에 실패했습니다!');
+	</script>
+</c:if>
 	<form method="POST" action="/cafe/reboard/reBoardReply.cafe" id="frm" name="frm">
 		<input type="hidden" name="rno" id="rno">
 		<input type="hidden" name="upno" id="upno">

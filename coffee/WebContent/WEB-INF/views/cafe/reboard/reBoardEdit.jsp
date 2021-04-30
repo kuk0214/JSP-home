@@ -65,7 +65,6 @@
 		
 		<form method="POST" action="/cafe/reboard/reBoardEditProc.cafe" name="frm" id="frm"
 				class="w3-col w3-round-large w3-card-4 w3-margin-bottom">
-			<input type="hidden" name="mno" id="mno" value="${DATA.mno}">
 			<input type="hidden" name="rno" id="rno" value="${DATA.rno}">
 			<div class="w3-col w3-center box120 pdAll10">
 				<img src="/cafe/img/avatar/${DATA.avatar}" class="inblock w3-circle avtBox100 border3px w3-card-2">

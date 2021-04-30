@@ -158,10 +158,33 @@ public class ReBoardDao {
 	}
 	
 	// 게시글 수정 전담 처리 함수
-	public int editReBRD(BoardVO rVO) {
+	public int editReBRD(Map<String, String[]> map) {
 		int cnt = 0;
+		// 매개변수 데이터 처리하고
+		Set<String> set = map.keySet();
+		ArrayList<String> list = new ArrayList<String>(set);
+		list.remove("rno");
+		String str = list.toString().replaceAll("\\[|\\]", "").replaceAll(",", " = ? , ") + " = ? ";
+		
 		con = db.getCon();
 		String sql = rSQL.getSQL(rSQL.EDIT_REBRD);
+		sql = sql.replaceAll("###", str);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			for(int i = 0 ; i < list.size() ; i++ ) {
+				pstmt.setString((i+1), map.get(list.get(i))[0]);
+			}
+			pstmt.setInt(list.size() + 1, Integer.parseInt(map.get("rno")[0]));
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
 		return cnt;
 	}
+	
+
 }
