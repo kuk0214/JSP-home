@@ -182,3 +182,29 @@
 								http://localhost/cafe/reboard/reBoardList.cafe
 						실패 ]
 								http://localhost/cafe/reboard/reBoardEdit.cafe
+
+==================================================================================================================	
+
+# 게시판 관련 기능
+
+1. 게시판 리스트 폼보기 요청
+	요청내용	: http://localhost/cafe/board/board.cafe
+	파라미터	: (nowPage)
+	컨트롤러	: com.increpas.cafe.controller.board.BoardList
+	뷰			: /WEB-INF/views/cafe/board/boardList.jsp
+	
+2. 게시판 글쓰기 폼보기 요청
+	요청내용	: http://localhost/cafe/board/boardWrite.cafe
+	파라미터	: 무
+	컨트롤러	: com.increpas.cafe.controller.board.BoardWrite
+	뷰			: /WEB-INF/views/cafe/board/boardWrite.jsp
+	
+3. 게시판 글쓰기 처리 요청
+	요청내용	: http://localhost/cafe/board/boardWriteProc.cafe
+	파라미터	: title, body (SID)
+	컨트롤러	: com.increpas.cafe.controller.board.BoardWriteProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/board/board.cafe
+						실패 ]
+								http://localhost/cafe/board/boardWrite.cafe
