@@ -25,7 +25,7 @@
 <body>
 	<c:if test="${not empty name}">
 	<div class="w3-content mxw600 w3-center">
-		<h1 class="w3-blue w3-margin-top">name : ${name}</h1>
+		<h1 class="w3-blue w3-margin-top">name : ${name}</h1> 
 	</div>
 	</c:if>
 </body>
