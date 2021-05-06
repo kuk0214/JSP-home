@@ -126,6 +126,10 @@
 	margin-bottom: 10px;
 	overflow: hidden;
 }
+.img100 {
+	width: 100px;
+	height: auto;
+}
 .img210 {
 	width: 230px;
 	height: auto;
@@ -156,7 +160,11 @@
 	width: 100px;
 	height: auto;
 }
-
+.imgBox100 {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
 .noresize {
 	resize: none;
 }

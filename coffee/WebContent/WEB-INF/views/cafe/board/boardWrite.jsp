@@ -18,6 +18,13 @@
 	}
 </style>
 <script type="text/javascript">
+	var cnt = 1;
+	function getCnt() {
+		return cnt;
+	}
+	function setCnt() {
+		cnt += 1;
+	}
 	$(document).ready(function() {
 		$('.w3-third').click(function() {
 			var bid = $(this).attr('id');
@@ -36,10 +43,60 @@
 					alert('# 제목&내용을 확인하세요!');
 					return;
 				}
+				$('.file').last().prop('disabled', true);
+				
 				$('#frm').submit();
 				return;
 			}
 			$(location).attr('href', url);
+		});
+		
+		function addTag(e, el) {
+			var tmp = $(el).val();
+			var taglist = $('.file');
+			var len = taglist.legth;
+			var tid = $(el).attr('id');
+			
+			if(!tmp && len != 1) {
+				$(el).remove();
+				$('#img_' + tid).remove();
+			}
+			
+			if(tmp) {
+				setCnt();
+				var idCnt = getCnt();
+				$('#filefr').append('<input type="file" name="file' + idCnt + '" id="file' + idCnt + '" class="w3-col w3-input w3-round w3-border mgb10 file">');
+				
+				// 파일 꺼내오고...
+				var img = URL.createObjectURL(e.target.files[0]);
+				
+				$('#fileImg').append('<div class="inblock box120 pdAll10 mgl10 w3-border w3-border-grey w3-card" id="img_' + tid + '">' +
+											'<div class="w3-col imgBox100">' + 
+												'<img class="w3-col img100" src="' + img + '">' +
+											'</div>' +
+									  '</div>');
+				
+				// 반드시 추가된 태그에만 이벤트를 등록한다. 
+				var tmp = $('#file' + idCnt);
+				$(tmp).change(function(event) {
+					addTag(event, $(tmp));
+				});
+				
+				
+			}
+			
+			taglist = $('.file');
+			var len = taglist.length;
+			
+			if(len== 1) {
+				$('#fileImg').css('display', 'none');					
+			} else {
+				$('#fileImg').css('display', 'block');										
+			}
+		}
+		
+		$('.file').change(function(e) {
+			addTag(e, this);
 		});
 	});
 </script>
@@ -113,8 +170,23 @@
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">
 				<label for="title" class="w3-col w150 w3-center w3-text-grey pdt5 ft14">첨부파일</label>
 				<div class="w3-rest pdr30">
-					<input type="file" name="file1" id="file1" class="w3-col w3-input w3-round w3-border file">
-					<div class="w3-col w3-margin-top" id="fileImg"></div>
+					<div class="w3-col" id="filefr">
+						<input type="file" name="file1" id="file1" class="w3-col w3-input w3-round w3-border mgb10 file">
+					</div>
+					<div class="w3-col w3-margin-top w3-center pdAll10" id="fileImg">
+					<%--
+						<div class="inblock box120 pdAll10 mgl10 w3-border w3-border-grey w3-card">
+							<div class="w3-col imgBox100"> 
+								<img class="w3-col img100" src="/cafe/img/upload/noimage.jpg" id="img_file1">
+							</div>
+						</div>
+						<div class="inblock box120 pdAll10 w3-border w3-border-grey w3-card">
+							<div class="w3-col imgBox100"> 
+								<img class="w3-col img100" src="/cafe/img/upload/noimage.jpg" id="img_file2">
+							</div>
+						</div>
+					 --%>
+					</div>
 				</div>
 			</div>
 			<div class="w3-col w3-margin-top w3-margin-bottom pdb10 w3-border-bottom w3-border-light-grey">

@@ -137,4 +137,60 @@ public class BoardDao {
 		}
 		return cnt;
 	}
+	
+	// 게시글 상세 정보 조회 전담 처리 함수
+	public BoardVO getBnoInfo(int bno) {
+		BoardVO bVO = new BoardVO();
+		con = db.getCon();
+		String sql = bSQL.getSQL(bSQL.SEL_BNO_DETAIL);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			rs.next();
+			bVO.setBno(rs.getInt("bno"));
+			bVO.setId(rs.getString("id"));
+			bVO.setTitle(rs.getString("title"));
+			bVO.setBody(rs.getString("body"));
+			bVO.setWdate(rs.getDate("wdate"));
+			bVO.setWtime(rs.getTime("wdate"));
+			bVO.setSdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return bVO;
+	}
+	
+	// 첨부파일 조회 전담 처리 함수
+	public ArrayList<FileVO> getFileList(int bno) {
+		ArrayList<FileVO> list = new ArrayList<FileVO>();
+		con = db.getCon();
+		String sql = bSQL.getSQL(bSQL.SEL_FBNO_LIST);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				FileVO fVO = new FileVO();
+				fVO.setFno(rs.getInt("fno"));
+				fVO.setOriname(rs.getString("oriname"));
+				fVO.setSavename(rs.getString("savename"));
+				
+				list.add(fVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return list;
+	}
 }

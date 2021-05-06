@@ -58,12 +58,28 @@
 			$('#frm').attr('action', '/cafe/board/board.cafe');
 			$('#frm').submit();
 		});
+		
+		// 게시글 상세보기 이벤트 처리
+		$('.list').click(function() {
+			// 선택된 태그의 아이디값에서 두번째 자리에서부터 마지막까지 잘라서 꺼내보자.
+			// 예 ]		id="l100001"	==> 100001
+			var tno = $(this).attr('id').substring(1);
+			// 추출한 글번호를 폼태그의 입력태그에 셋팅해주고
+			$('#bno').val(tno);
+			
+			// 폼태그가 전송될 주소를 셋팅하고
+			$('#frm').attr('action', '/cafe/board/boardDetail.cafe');
+			
+			// 폼태그를 전송한다.
+			$('#frm').submit();
+		});
 	});
 </script>
 </head>
 <body>
 	<form method="POST" action="/cafe/board/board.cafe" id="frm" name="frm">
-		<input type="hidden" name="nowPage" id="nowPage">
+		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}"> <!-- 현재페이지 전송용 || 이동페이지 전송용 -->
+		<input type="hidden" name="bno" id="bno"> <!-- 글번호 전송용태그 -->
 	</form>
 	<div class="w3-content mxw700 w3-margin-top w3-padding">
 		<div class="w3-col w3-card-4 w3-margin-top w3-margin-bottom">
@@ -90,7 +106,7 @@
 			</div>
 			<!-- 데이터 -->
 	<c:forEach var="data" items="${LIST}">
-			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-hover-lime">
+			<div class="w3-col w3-border-left w3-border-right w3-border-bottom w3-hover-lime list" id="l${data.bno}">
 				<span class="w3-col w150 w3-center w3-border-right">${data.bno}</span>
 				<span class="w3-col w250 w3-center w3-border-right">${data.title}</span>
 				<span class="w3-col w100 w3-center w3-border-right">${data.id}</span>
