@@ -43,7 +43,7 @@
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">
 				<label for="title" class="w3-col w150 w3-center w3-text-grey pdt5 ft14">글제목</label>
 				<div class="w3-rest pdr30">
-					<input class="w3-rest w3-input w3-round w3-border" value="${DATA.title}">
+					<input class="w3-rest w3-input w3-round w3-border" id="title" name="title" value="${DATA.title}">
 				</div>
 			</div>
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">

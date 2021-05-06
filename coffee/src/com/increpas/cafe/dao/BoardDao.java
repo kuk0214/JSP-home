@@ -193,4 +193,33 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	// 게시글 수정 데이터 베이스 전담 처리 함수
+	public int editBRD(int bno, Map<String, String[]> map) {
+		int cnt = 0;
+		
+		con = db.getCon();
+		String sql = bSQL.getSQL(bSQL.EDIT_BRD);
+		
+		Set<String> set = map.keySet();
+		ArrayList<String> list = new ArrayList<String>(set);
+		list.remove("nowPage");
+		list.remove("bno");
+		String str = list.toString().replaceAll("\\[|\\]", "").replaceAll(",", " = ? , ") + " = ? ";
+		
+		sql = sql.replaceAll("###", str);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			for(int i = 0 ; i < list.size(); i++ ) {
+				pstmt.setString((i+1), map.get(list.get(i))[0]);
+			}
+			pstmt.setInt(list.size() + 1, bno);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 }

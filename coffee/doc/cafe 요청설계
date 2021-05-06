@@ -220,3 +220,13 @@
 	파라미터	: nowPage, bno
 	컨트롤러	: com.increpas.cafe.controller.board.BoardEdit
 	뷰			: /WEB-INF/views/cafe/board/boardEidt.jsp
+	
+6. 게시글 수정 처리 요청
+	요청내용	: http://localhost/cafe/board/boardEditProc.cafe
+	파라미터	: title || body
+	컨트롤러	: com.increpas.cafe.controller.board.BoardEditProc
+	뷰			: redirect ]
+						성공 ]
+								http://localhost/cafe/board/board.cafe
+						실패 ]
+								http://localhost/cafe/board/boardEdit.cafe
