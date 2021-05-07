@@ -25,8 +25,10 @@
 		});
 		
 		$('#ebtn').click(function() {
-			$('#frm').attr('action', '/cafe/board/boardEdit.cafe');
-			$('#frm').submit();
+			if(confirm('수정작업을 진행할까요?')) {
+				$('#frm').attr('action', '/cafe/board/boardEdit.cafe');
+				$('#frm').submit();
+			}
 		});
 	});
 </script>

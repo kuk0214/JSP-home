@@ -194,32 +194,82 @@ public class BoardDao {
 		return list;
 	}
 	
-	// 게시글 수정 데이터 베이스 전담 처리 함수
-	public int editBRD(int bno, Map<String, String[]> map) {
-		int cnt = 0;
-		
+	// 게시글 수정 데이터 조회 전담 처리 함수
+	public BoardVO getBoardData(int bno) {
+		BoardVO bVO = new BoardVO();
+		ArrayList<FileVO> list = new ArrayList<FileVO>();
+		bVO.setList(list);
 		con = db.getCon();
-		String sql = bSQL.getSQL(bSQL.EDIT_BRD);
-		
-		Set<String> set = map.keySet();
-		ArrayList<String> list = new ArrayList<String>(set);
-		list.remove("nowPage");
-		list.remove("bno");
-		String str = list.toString().replaceAll("\\[|\\]", "").replaceAll(",", " = ? , ") + " = ? ";
-		
-		sql = sql.replaceAll("###", str);
+		String sql = bSQL.getSQL(bSQL.SEL_BOARD_DETAIL);
 		pstmt = db.getPSTMT(con, sql);
 		try {
-			for(int i = 0 ; i < list.size(); i++ ) {
-				pstmt.setString((i+1), map.get(list.get(i))[0]);
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				// 먼저 게시글 정보를 꺼내서 bVO에 추가한다.
+				// 이때 동일한 내용이 여러번 만들어 질 수 있으므로
+				// 한번만 입력하면 된다.
+				if(bVO.getBno() == 0) {
+					bVO.setBno(rs.getInt("bno"));
+					bVO.setId(rs.getString("id"));
+					bVO.setTitle(rs.getString("title"));
+					bVO.setBody(rs.getString("body"));
+					bVO.setWdate(rs.getDate("wdate"));
+					bVO.setWtime(rs.getTime("wdate"));
+					bVO.setSdate();
+				}
+				// 파일 정보 꺼내서 기억하고
+				FileVO fVO = new FileVO();
+				fVO.setFno(rs.getInt("fno"));
+				fVO.setOriname(rs.getString("oriname"));
+				fVO.setSavename(rs.getString("savename"));
+				
+				list.add(fVO);
 			}
-			pstmt.setInt(list.size() + 1, bno);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return bVO;
+	}
+	
+	// 게시글 수정 데이터 베이스 작업 전담 처리 함수
+	public int editBRD(int bno, String txt) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = bSQL.getSQL(bSQL.EDIT_BRD).replaceAll("###", txt);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, bno);
+			cnt = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			db.close(pstmt);
 			db.close(con);
 		}
+		return cnt;
+	}
+	
+	// 파일 삭제 데이터 베이스 작업 전담 처리 함수
+	public int delFile(int fno) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = bSQL.getSQL(bSQL.DEL_FILE);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setInt(1, fno);
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
 		return cnt;
 	}
 }

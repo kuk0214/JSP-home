@@ -90,6 +90,18 @@
 		});
 		
 		$('#sbtn').click(function() {
+			var ttitle = $('#title').val();
+			var tbody = $('#body').val();
+			
+			if(!ttitle || ttitle == '${DATA.title}') {
+				$('#title').prop('disabled', true);
+			}
+			
+			if(!tbody || tbody == '${DATA.body}') {
+				$('#body').prop('disabled', true);
+			}
+			
+			$('.file').last().remove();
 			$('#efrm').submit();
 		});
 		
@@ -140,6 +152,32 @@
 		$('.file').change(function(e) {
 			addTag(e, this);
 		});
+		
+		$('.imgFile').click(function() {
+			var sno = $(this).attr('id').substring(4);
+			// img_100001 ==> 100001
+			
+			if(confirm(sno + ' ] 파일을 삭제할까요?')) {
+				$.ajax({
+					url: '/cafe/board/boardImgDel.cafe',
+					type: 'post',
+					dataType: 'json',
+					data: {
+						fno: sno
+					},
+					success: function(obj) {
+						if(obj.result == 'YES') {
+							$('#img_' + sno).remove();
+						} else {
+							alert('*** 삭제에 실패했습니다! ***');
+						}
+					},
+					error: function() {
+						alert('####### 통신 에러 #######')
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
@@ -147,62 +185,63 @@
 	<form method="POST" action="/cafe/board/board.cafe" id="lfrm" name="lfrm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${param.nowPage}">
 	</form>
+	
 	<div class="w3-content mxw700 w3-margin-top w3-padding">
-		<h1 class="w3-purple w3-padding w3-center w3-card-4 w3-margin-top w3-margin-bottom">${DATA.id} 님 글 수정하기</h1>
+		<h1 class="w3-purple w3-padding w3-center w3-card-4 w3-margin-top w3-margin-bottom">게시판 글 수정</h1>
 		<!-- form 태그 -->
-		<form method="POST" action="/cafe/board/boardEditProc.cafe" id="efrm" name="efrm" 
-				class="w3-col w3-padding w3-margin-bottom w3-card-4 ">
+		<form method="POST" action="/cafe/board/boardEditProc.cafe" name="efrm" id="efrm" encType="multipart/form-data"
+			class="w3-col w3-padding w3-margin-bottom w3-card-4">
+			
+			<input type="hidden" name="nowPage" value="${param.nowPage}">
+			<input type="hidden" name="bno" id="bno" value="${DATA.bno}">
+			
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">
-				<label for="title" class="w3-col w150 w3-center w3-text-grey pdt5 ft14">글제목</label>
+				<label for="title" class="w3-col w150 w3-center w3-text-grey ft14">글제목</label>
 				<div class="w3-rest pdr30">
-					<input class="w3-rest w3-input w3-round w3-border" id="title" name="title" value="${DATA.title}">
+					<input type="text" name="title" id="title" class="w3-rest w3-input w3-round w3-border" 
+															placeholder="글제목 입력!" value="${DATA.title}">
 				</div>
 			</div>
+		<c:if test="${not empty DATA.list[0].savename}">
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">
-				<label class="w3-col w150 w3-center w3-text-grey pdt5 ft14">첨부파일</label>
+				<label class="w3-col w150 w3-center w3-text-grey ft14">첨부파일</label>
 				<div class="w3-rest pdr30">
-					<div class="w3-col w3-margin-top w3-center pdAll10" id="addImg">
-			<c:forEach var="data" items="${LIST}">
-						<div class="inblock box120 pdAll10 mgl10 w3-border w3-border-grey w3-card">
-							<div class="w3-col imgBox100"> 
-								<img class="w3-col img100" src="/cafe/img/upload/${data.savename}" id="img_${data.fno}">
+					<div class="w3-col w3-margin-top w3-center w3-border pdAll10" id="addImg">
+			<c:forEach var="data" items="${DATA.list}">
+						<div class="inblock box120 pdAll10 mgl10 w3-border w3-broder-grey w3-card imgFile" id="img_${data.fno}">
+							<div class="w3-col imgBox100">
+								<img class="w3-col img100" src="/cafe/img/upload/${data.savename}">
 							</div>
 						</div>
-			</c:forEach>						
+			</c:forEach>
 					</div>
 				</div>
 			</div>
-			
+		</c:if>
 			<div class="w3-col w3-margin-top pdb10 w3-border-bottom w3-border-light-grey">
-				<label class="w3-col w150 w3-center w3-text-grey pdt5 ft14">파일추가</label>
+				<label class="w3-col w150 w3-center w3-text-grey ft14">파일추가</label>
 				<div class="w3-rest pdr30">
-					<div class="w3-col w3-margin-top w3-center pdAll10" id="fileImg">
-			<c:forEach var="data" items="${LIST}">
-						<div class="inblock box120 pdAll10 mgl10 w3-border w3-border-grey w3-card">
-							<div class="w3-col imgBox100"> 
-								<img class="w3-col img100" src="/cafe/img/upload/${data.savename}" id="img_file1">
-							</div>
-						</div>
-			</c:forEach>						
+					<div class="w3-col" id="filefr">
+						<input type="file" name="file1" id="file1" class="w3-col w3-input w3-round w3-border mgb10 file">
 					</div>
+					<div class="w3-col w3-margin-top w3-center pdAll10" id="fileImg"></div>
 				</div>
 			</div>
-			
 			<div class="w3-col w3-margin-top w3-margin-bottom pdb10 w3-border-bottom w3-border-light-grey">
-				<label for="body" class="w3-col w150 w3-center w3-text-grey pdt5 ft14">글내용</label>
+				<label for="body" class="w3-col w150 w3-center w3-text-grey ft14">글내용</label>
 				<div class="w3-rest pdr30">
-					<textarea name="body" id="body" rows="7" 
-						class="w3-rest w3-input w3-round w3-border noresize">${DATA.body}</textarea>
+					<textarea name="body" id="body"  rows="7"
+							class="w3-col w3-input w3-round w3-border noresize" placeholder="글내용 입력!">${DATA.body}</textarea>
 				</div>
 			</div>
 		</form>
 		
 		<!-- 버튼 태그 -->
 		<div class="w3-col w3-margin-top w3-card-4">
-			<div class="w3-quater w3-green w3-hover-lime w3-button" id="hbtn">home</div>
-			<div class="w3-quater w3-green w3-hover-lime w3-button" id="bbtn">board</div>
-			<div class="w3-quater w3-blue w3-hover-pink w3-button" id="rbtn">reset</div>
-			<div class="w3-quater w3-orange w3-hover-red w3-button" id="sbtn">submit</div>
+			<div class="w3-quarter w3-green w3-hover-lime w3-button" id="hbtn">home</div>
+			<div class="w3-quarter w3-blue w3-hover-pink w3-button" id="bbtn">Board</div>
+			<div class="w3-quarter w3-deep-purple w3-hover-pink w3-button" id="rbtn">reset</div>
+			<div class="w3-quarter w3-orange w3-hover-red w3-button" id="sbtn">submit</div>
 		</div>
 	</div>
 </body>

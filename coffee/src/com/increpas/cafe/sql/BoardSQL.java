@@ -6,8 +6,10 @@ public class BoardSQL {
 	public final int SEL_MAX_BNO		=	1003;
 	public final int SEL_BNO_DETAIL		=	1004;	
 	public final int SEL_FBNO_LIST		=	1005;
+	public final int SEL_BOARD_DETAIL	=	1006;
 	
 	public final int EDIT_BRD			=	2001;
+	public final int DEL_FILE			=	2002;
 	
 	public final int ADD_BOARD			=	3001;
 	public final int ADD_FILE			=	3002;
@@ -79,6 +81,19 @@ public class BoardSQL {
 			buff.append("    fbno = ? ");
 			buff.append("    AND isShow = 'Y'");
 			break;
+		case SEL_BOARD_DETAIL:
+			buff.append("SELECT ");
+			buff.append("    bno, fno, id, title, body, wdate, oriname, savename ");
+			buff.append("FROM ");
+			buff.append("    board b, member m, upfile f ");
+			buff.append("WHERE ");
+			buff.append("    bmno = mno ");
+			buff.append("    AND bno = fbno(+) "); 
+			buff.append("    AND bno = ? ");
+			buff.append("    AND f.isshow(+) = 'Y' ");
+			buff.append("ORDER BY ");
+			buff.append("    fno DESC ");
+			break;
 		case EDIT_BRD:
 			buff.append("UPDATE ");
 			buff.append("    board ");
@@ -86,6 +101,14 @@ public class BoardSQL {
 			buff.append("    ### ");
 			buff.append("WHERE ");
 			buff.append("    bno = ?");
+			break;
+		case DEL_FILE:
+			buff.append("UPDATE ");
+			buff.append("    upfile ");
+			buff.append("SET ");
+			buff.append("    isShow = 'N' ");
+			buff.append("WHERE ");
+			buff.append("    fno = ?");
 			break;
 		case ADD_BOARD:
 			buff.append("INSERT INTO ");

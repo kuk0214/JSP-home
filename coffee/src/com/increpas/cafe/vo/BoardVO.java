@@ -3,12 +3,15 @@ package com.increpas.cafe.vo;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.*;
+import java.util.ArrayList;
 
 public class BoardVO {
 	private int gno, rno, bno, mno, ano, cnt, step, upno;
 	private String id, name, title, uptitle, body, sdate, avatar;
 	private Date wdate;
 	private Time wtime;
+	private ArrayList<FileVO> list;
+	
 	public int getGno() {
 		return gno;
 	}
@@ -119,6 +122,12 @@ public class BoardVO {
 	}
 	public void setWtime(Time wtime) {
 		this.wtime = wtime;
+	}
+	public ArrayList<FileVO> getList() {
+		return list;
+	}
+	public void setList(ArrayList<FileVO> list) {
+		this.list = list;
 	}
 	@Override
 	public String toString() {

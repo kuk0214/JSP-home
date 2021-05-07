@@ -223,10 +223,16 @@
 	
 6. 게시글 수정 처리 요청
 	요청내용	: http://localhost/cafe/board/boardEditProc.cafe
-	파라미터	: title || body
+	파라미터	: nowPage, bno, [title || body], [file] 
 	컨트롤러	: com.increpas.cafe.controller.board.BoardEditProc
 	뷰			: redirect ]
 						성공 ]
-								http://localhost/cafe/board/board.cafe
+								http://localhost/cafe/board/boardDetail.cafe
 						실패 ]
 								http://localhost/cafe/board/boardEdit.cafe
+								
+7. 첨부파일 삭제 처리 요청
+	요청내용	: http://localhost/cafe/board/boardImgDel.cafe
+	파라미터	: fno
+	컨트롤러	: com.increpas.cafe.controller.board.BoardImgDel
+	뷰			: ajax ] json

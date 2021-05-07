@@ -22,16 +22,11 @@ public class BoardEdit implements CafeController {
 		}
 		String sno = req.getParameter("bno");
 		int bno = Integer.parseInt(sno);
-		String spage = req.getParameter("nowPage");
 		
 		BoardDao bDao = new BoardDao();
-		BoardVO bVO = bDao.getBnoInfo(bno);
-		ArrayList<FileVO> list = bDao.getFileList(bno);
+		BoardVO bVO = bDao.getBoardData(bno);
 		
-		
-		req.setAttribute("nowPage", spage);
 		req.setAttribute("DATA", bVO);
-		req.setAttribute("LIST", list);
 		return view;
 	}
 
